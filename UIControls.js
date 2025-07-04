@@ -1,5 +1,7 @@
 ///////// Global definitions
-/* find the four range inputs */
+
+/* Because the inputs are referenced in multiple areas we need to declare them at the top of the file */
+
 let var1Input = document.getElementById("var1Range");
 let var2Input = document.getElementById("var2Range");
 let var3Input = document.getElementById("var3Range");
@@ -8,6 +10,7 @@ let var4Input = document.getElementById("var4Range");
 
 
 ///////// Intro Modal popup
+
 /* find modal */
 let introModal = document.getElementById("introDialog");
 /* to get the backdrop working we need to open the modal with js */
@@ -69,11 +72,12 @@ presetInputs.forEach((input) => {
 /* We set the first radio input to checked */
 presetInputs[0].checked = true;
 /* And then run the apply preset function using the first preset from synthPresets */
-applyPreset(synthPresets[0]);
+//applyPreset(synthPresets[0]);
 
 
 
 ///////// Playback Toggle
+
 /* define current playback state as true/false boolean */
 let isPlaying = false;
 /* find playback toggle button */
@@ -117,6 +121,7 @@ playbackToggleButton.addEventListener("click", () => {
 
 
 ///////// Feedback
+
 /* For volume feedback */
 let meterText = document.getElementById("meterOutputText");
 let meterCheckInterval = 50;
@@ -129,3 +134,54 @@ let volumeCheck = setInterval(() => {
   if(currentVolume < -80) currentVolume = -Infinity;
   meterText.innerHTML = Math.floor(currentVolume);
 }, meterCheckInterval);
+
+
+
+///////// Variable Sliders
+
+/* 
+
+*/
+
+/* 
+Functions called via an event listener automatically receive an event object as their first parameter, which 
+in this case we're calling e
+*/
+function changeVolume(e){
+  /* first we find the thing we want from the event, in this case the value of the input it was triggered on */
+  let newVolume = e.target.value;
+  /* 
+  then we set the volume of the synth based on this : this is a Tone.js specific method, run on the synth 
+  polySynth which is defined within toneSetup.js 
+  */
+ polySynth.set({volume: newVolume});
+}
+
+/* then we add an eventlister that triggers our function to the appropriate input */
+var1Input.addEventListener("input", changeVolume);
+
+
+function changeSpread(e){
+  /* while the range input will give whole numbers we need to convert to int */
+  let intValue = Math.floor(e.target.value);
+  /* our range input has a range of 0 - 100, but each of the things we want it to affect expect different ranges */
+  /* the following four variables take the intValue and convert to those ranges */
+  let newCount = clamp(1 + (intValue / 5), 3, 6);
+  let newSpread = intValue * 2;
+  let newPan = intValue / 50;
+  let newHumanize = intValue / 100;
+  /* then we take those values and apply them to the synth and effects */
+  polySynth.set({
+    oscillator : {
+      count: newCount,
+      spread: newSpread
+    }
+  });
+  autoPanner.set({
+    wet: newPan
+  });
+  part.humanize = newHumanize;
+}
+
+var2Input.addEventListener("input", changeSpread);
+

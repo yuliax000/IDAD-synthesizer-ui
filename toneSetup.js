@@ -135,15 +135,7 @@ var4Input.addEventListener("input", e => {
   dist.set({ distortion : distLevel });
 }); */
 
-///////// Helper Functions
 
-function remapRange(value, min1, max1, min2, max2){
-  return min2 + (max2 - min2) * (value - min1) / (max1 - min1);
-}
-
-function clamp(value, min, max){
-  return Math.min(Math.max(value, min), max);
-}
 
 
 

@@ -19,13 +19,15 @@
   <!-- Import our JS files -->
   <!-- As these reference to DOM elements, we want to load them after it has loaded, so we use the defern property -->
   <!-- https://developer.mozilla.org/en-US/docs/Web/API/HTMLScriptElement/defer -->
-  <!-- This first script initialises the audio synthesizer system using tone -->
+   <!-- This first script has some functions for generic tasks -->
+   <script src="helperFunctions.js" defer></script>
+  <!-- This second script initialises the audio synthesizer system using tone -->
   <script src="toneSetup.js" defer></script>
-  <!-- This second script handles sending notes from the keyboard controller to the synthesizer, again kept seperate
+  <!-- This third script handles sending notes from the keyboard controller to the synthesizer, again kept seperate
        so that it can be modular -->
   <script src="keyboardController.js" defer></script>
   <!-- The last script handles connecting the rest of the UI to the synthesizer -->
-  <script src="script.js" defer></script>
+  <script src="UIControls.js" defer></script>
 
   <title>Synth UI Exercise</title>
 
@@ -33,7 +35,7 @@
        and other contributors -->
   <!-- They are licensed under CC-BY 4.0 as linked below -->
   <!-- https://creativecommons.org/licenses/by/4.0/ -->
-  <link rel="icon" type="image/png" href="./favicon.png">
+  <link rel="icon" type="image/png" href="./assets/favicon.png">
   
 </head>
 
@@ -76,37 +78,37 @@
     <!-- Sequence Playback -->
     <button class="playbackToggle play">play</button>
 
+    <!-- Volume Slider -->
+    <div class="rangeBox">
+      <span>A</span>
+      <input type="range" id="var1Range" min="0" max="100" step="1" value="100">
+      <span>B</span>
+    </div>
+
     <!-- Volume Meter -->
     <div id="meterBox">
       <p>Current Volume: <span id="meterOutputText"></span></p>
     </div>
-    
-    
+      
+    <!-- Spread Variable -->
+    <div class="rangeBox">
+      <span>A</span>
+      <input type="range" id="var2Range" min="1" max="100" step="1" value="50">
+      <span>B</span>
+    </div>
 
-    <!-- Variable Control Sliders -->
-    <div id="rangeSliderWrapper">
+    <!--  -->
+    <div class="rangeBox">
+      <span>A</span>
+      <input type="range" id="var3Range" min="0" max="1" step="0.01" value="0.2">
+      <span>B</span>
+    </div>
 
-      <div class="rangeBox">
-        <span>A</span>
-        <input type="range" id="var1Range" min="1" max="25" step="1" value="1">
-        <span>B</span>
-      </div>
-      <div class="rangeBox">
-        <span>A</span>
-        <input type="range" id="var2Range" min="1" max="100" step="1" value="50">
-        <span>B</span>
-      </div>
-      <div class="rangeBox">
-        <span>A</span>
-        <input type="range" id="var3Range" min="0" max="1" step="0.01" value="0.2">
-        <span>B</span>
-      </div>
-      <div class="rangeBox">
-        <span>A</span>
-        <input type="range" id="var4Range" min="1" max="130" step="1" value="100">
-        <span>B</span>
-      </div>
-
+    <!--  -->
+    <div class="rangeBox">
+      <span>A</span>
+      <input type="range" id="var4Range" min="1" max="130" step="1" value="100">
+      <span>B</span>
     </div>
 
         
