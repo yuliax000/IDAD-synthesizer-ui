@@ -7,8 +7,6 @@ let var2Input = document.getElementById("var2Range");
 let var3Input = document.getElementById("var3Range");
 let var4Input = document.getElementById("var4Range");
 
-
-
 ///////// Intro Modal popup
 
 /* find modal */
@@ -184,4 +182,63 @@ function changeSpread(e){
 }
 
 var2Input.addEventListener("input", changeSpread);
+
+
+
+////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+let acceptedOscTypes = [
+  "fatsine",
+	"fatsquare",
+	"fatsawtooth",
+	"fattriangle"
+]
+
+function changeOscillatorType(newOscType){
+  /* check to see if parameter matches one of the accepted types in the above array */
+  if (acceptedOscTypes.includes(newOscType)){
+    polySynth.set({
+      oscillator : { type: newOscType }
+    });
+  }
+}
+
+////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+let acceptedFilterTypes = [
+  "lowpass",
+  "highpass",
+  "bandpass",
+  "notch"
+]
+
+function changeFilterType(newFilterType){
+  /* check to see if parameter matches one of the accepted types in the above array */
+  if (acceptedFilterTypes.includes(newFilterType)){
+    filter.set({
+      type: newFilterType
+    });
+  }
+}
+
+function changeFilterFreq(newFilterFreq){
+  /* check to see if parameter within expected range */
+  if ( newFilterFreq >= 0 && newFilterFreq < 10000){
+    filter.set({
+      frequency: newFilterFreq
+    });
+  }
+}
+
+function changeFilterQ(newFilterQ){
+  /* check to see if parameter within expected range */
+  if ( newFilterQ >= 0 && newFilterQ < 20){
+    filter.Q.value = newFilterQ;
+  }
+}
+
+//////////////////////// Testing
+var4Input.addEventListener("change", e => {
+  changeFilterFreq(e.target.value);
+})
+
+
 

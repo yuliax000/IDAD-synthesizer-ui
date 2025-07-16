@@ -43,7 +43,7 @@ let polySynth = new Tone.PolySynth(Tone.Synth, {
 let autoPanner = new Tone.AutoPanner("8n").start();
 autoPanner.set({ wet: 0.15 });
 
-let filter = new Tone.Filter(0, "highpass");
+let filter = new Tone.Filter(0, "lowpass");
 
 const dist = new Tone.Distortion(0);
 
