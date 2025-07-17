@@ -221,10 +221,8 @@ function changeFilterType(newFilterType){
 
 function changeFilterFreq(newFilterFreq){
   /* check to see if parameter within expected range */
-  if ( newFilterFreq >= 0 && newFilterFreq < 10000){
-    filter.set({
-      frequency: newFilterFreq
-    });
+  if ( newFilterFreq >= 0 && newFilterFreq < 20000){
+    filter.frequency.value = newFilterFreq;
   }
 }
 
@@ -235,10 +233,27 @@ function changeFilterQ(newFilterQ){
   }
 }
 
+function changeDistortionAmount(newDistAmt){
+  /* check to see if parameter within expected range */
+  if ( newDistAmt >= 0 && newDistAmt < 1){
+    distortion.set({ distortion: newDistAmt });
+  }
+}
+
+function changeDetuneSpread(newSpreadAmt){
+  /* make sure parameter is an int : note this rounds DOWN */
+  let roundedSpread = Math.floor(newSpreadAmt);
+  polySynth.set({
+    oscillator: {
+      spread: roundedSpread
+    }
+  });
+}
+
 //////////////////////// Testing
-var4Input.addEventListener("change", e => {
-  changeFilterFreq(e.target.value);
+var3Input.addEventListener("input", e => {
+  changeDetuneSpread(e.target.value*10);
 })
 
-
+changeFilterFreq(2000);
 

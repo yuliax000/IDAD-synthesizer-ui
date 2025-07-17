@@ -45,7 +45,7 @@ autoPanner.set({ wet: 0.15 });
 
 let filter = new Tone.Filter(0, "lowpass");
 
-const dist = new Tone.Distortion(0);
+const distortion = new Tone.Distortion(0);
 
 const pingPong = new Tone.PingPongDelay("8n", 0.2);
 pingPong.set({ wet: 0.2 });
@@ -75,7 +75,7 @@ part.probability = 0.8;
 
 ///////// Init Function
 function toneInit(){
-  polySynth.chain(filter, autoPanner, dist, pingPong, meter, Tone.Destination);
+  polySynth.chain(filter, autoPanner, distortion, pingPong, meter, Tone.Destination);
 }
 
 
