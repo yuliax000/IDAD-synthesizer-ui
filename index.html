@@ -12,9 +12,6 @@
 
   <!-- Import our CSS stylesheets -->
   <link rel="stylesheet" href="style.css">
-  <!-- keyboardStyle.css is seperated, as the custom keyboard controller is intended to be modular -->
-  <!-- as it is loaded second, it will overwrite any conflicting CSS from style.css -->
-  <link rel="stylesheet" href="keyboardStyle.css">
 
   <!-- Import our JS files -->
   <!-- As these reference to DOM elements, we want to load them after it has loaded, so we use the defern property -->
@@ -51,67 +48,6 @@
     </dialog>
 
     <h1>Synth UI Template</h1>
-
-    <!-- Preset Selector -->
-    <fieldset class="presetBox">
-      <legend>Select a preset:</legend>
-
-      <div class="presetSelectorBox">
-        <div>
-          <input type="radio" id="presetOne" class="presetInput" name="presets" value="0" checked />
-          <label for="presetOne">1</label>
-        </div>
-      
-        <div>
-          <input type="radio" id="presetTwo" class="presetInput" name="presets" value="1" />
-          <label for="presetTwo">2</label>
-        </div>
-      
-        <div>
-          <input type="radio" id="presetThree" class="presetInput" name="presets" value="2" />
-          <label for="presetThree">3</label>
-        </div>
-
-      </div>      
-    </fieldset>
-
-    <!-- Sequence Playback -->
-    <button class="playbackToggle play">play</button>
-
-    <!-- Volume Slider -->
-    <div class="rangeBox">
-      <span>A</span>
-      <input type="range" id="var1Range" min="0" max="100" step="1" value="100">
-      <span>B</span>
-    </div>
-
-    <!-- Volume Meter -->
-    <div id="meterBox">
-      <p>Current Volume: <span id="meterOutputText"></span></p>
-    </div>
-      
-    <!-- Spread Variable -->
-    <div class="rangeBox">
-      <span>A</span>
-      <input type="range" id="var2Range" min="1" max="100" step="1" value="50">
-      <span>B</span>
-    </div>
-
-    <!--  -->
-    <div class="rangeBox">
-      <span>A</span>
-      <input type="range" id="var3Range" min="0" max="1" step="0.01" value="0.2">
-      <span>B</span>
-    </div>
-
-    <!--  -->
-    <div class="rangeBox">
-      <span>A</span>
-      <input type="range" id="var4Range" min="0" max="20000" step="1" value="200">
-      <span>B</span>
-    </div>
-
-        
 
     <!-- Keyboard Controller -->
     <div class="keyboardBox">

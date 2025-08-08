@@ -1,21 +1,9 @@
+/* .:*~*:._.:*~*:._.:*~*:._.:*~*:._.:*~*:._.:*~*:._.:*~*:._.:*~*:._.:*~*:. .:*~*:._.:*~*:._.:*~*:._.:*~*:._.:*~*:._.:*~*:._.:*~*:._.:*~*:._.:*~*:.  */
+/* Font Imports */
+
 @import url('https://fonts.googleapis.com/css2?family=Work+Sans:ital,wght@0,100..900;1,100..900&display=swap');
 
-/* Storing custom CSS properties */
-/* https://developer.mozilla.org/en-US/docs/Web/CSS/CSS_cascading_variables/Using_CSS_custom_properties */
-:root {
-  --col01: black;
-  --col02: white;
-  --col03: grey;
-  --border: solid 0.25rem var(--col02);
-}
-/* Change custom properties if user prefers light mode */
-@media (prefers-color-scheme: light) {
-  :root {
-    --col01: white;
-    --col02: black;
-  }
-}
-
+/* .:*~*:._.:*~*:._.:*~*:._.:*~*:._.:*~*:._.:*~*:._.:*~*:._.:*~*:._.:*~*:. .:*~*:._.:*~*:._.:*~*:._.:*~*:._.:*~*:._.:*~*:._.:*~*:._.:*~*:._.:*~*:.  */
 /* CSS Reset : based on Kevin Powell's code */
 /* https://youtu.be/2lyDv0wOQuQ?si=VtGSWSv8WB0flLd1 */
 *, *::before, *::after {
@@ -40,83 +28,20 @@ img, picture, svg, video {
   max-width: 100%;
 }
 
-/* Synth styling */
-
-body {
-  font-family: "Work Sans", serif;
-  background-color: var(--col01);
-  color: var(--col02);
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  gap: 1rem;
-}
-
-h1 {
-  text-align: center;
-}
-
-/* Preset selector styles */
-.presetBox {
-  padding: 1rem;
-}
-.presetSelectorBox {
-
-}
-
-input[type="radio"] {
-
-}
-input[type="radio"]:checked {
-
-}
-
-/* Playback button */
-.playbackToggle {
-  padding: 0.5rem;
-}
-/* When paused */
-.playbackToggle.play {
-  background-color: aqua;
-}
-/* When playing */
-.playbackToggle.pause {
-  background-color: red;
-}
-
-.feedbackExampleWrapper{
-  display: flex;
-  gap: 1rem;
-  margin-top: 2rem;
-}
-
-#rangeSliderWrapper{
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  gap: 1.5rem;
-  margin: 1.5rem;
-}
-
-.rangeBox{
-  display: flex;
-  justify-content: space-between;
-  width: 20rem;
-}
-.rangeBox span{
-  font-size: 2rem;
-}
+/* .:*~*:._.:*~*:._.:*~*:._.:*~*:._.:*~*:._.:*~*:._.:*~*:._.:*~*:._.:*~*:. .:*~*:._.:*~*:._.:*~*:._.:*~*:._.:*~*:._.:*~*:._.:*~*:._.:*~*:._.:*~*:.  */
+/* Storing custom CSS properties */
+/* https://developer.mozilla.org/en-US/docs/Web/CSS/CSS_cascading_variables/Using_CSS_custom_properties */
 
 
-
+/* .:*~*:._.:*~*:._.:*~*:._.:*~*:._.:*~*:._.:*~*:._.:*~*:._.:*~*:._.:*~*:. .:*~*:._.:*~*:._.:*~*:._.:*~*:._.:*~*:._.:*~*:._.:*~*:._.:*~*:._.:*~*:.  */
 /* Intro Modal dialog */
 /* need to apply to open dialog, otherwise flex interferes with closing */
 dialog[open] {
   margin: auto; /* place in centre */
   padding: 1rem;
-  background-color: var(--col01);
-  color: var(--col02);
-  border: var(--border);
+  /* background-color: var(--col01); */
+  /* color: var(--col02); */
+  /* border: var(--border); */
   display: flex;
   flex-direction: column;
   align-items: center;
@@ -126,10 +51,8 @@ dialog::backdrop {
   background-color: rgba(0, 0, 0, 0.5); /* background overlay when modal is open */
 }
 #dialogCloseButton {
-  background-color: var(--col01);
-  color: var(--col08);
+  /* background-color: var(--col01); */
+  /* color: var(--col02); */
   padding: 0 1rem;
 }
-
-/* Range Inputs */
 

@@ -7,36 +7,11 @@ let keyboardSynth = polySynth;
 
 let allKeys = Array.from(document.getElementsByClassName("whiteKey")).concat(Array.from(document.getElementsByClassName("blackKey")));
 
-let mouseDown = false;
-let lastNote;
-
-window.addEventListener("mousedown", () => {mouseDown = true});
-window.addEventListener("mouseup", () => {mouseDown = false});
+let octave = 3;
 
 allKeys.forEach(key => {
     key.addEventListener("mousedown", e => {
-        e.target.classList.add("activeKey");
         let note = e.target.dataset.note;
-        let octave = e.target.parentElement.parentElement.dataset.octave;
-        keyboardSynth.triggerAttack(note+octave);
-    });
-    key.addEventListener("mouseup", e => {
-        e.target.classList.remove("activeKey");
-        let note = e.target.dataset.note;
-        let octave = e.target.parentElement.parentElement.dataset.octave;
-        keyboardSynth.triggerRelease(note+octave);
-    });
-    key.addEventListener("mouseenter", e => {
-        if(mouseDown === false){ return }
-        e.target.classList.add("activeKey");
-        let note = e.target.dataset.note;
-        let octave = e.target.parentElement.parentElement.dataset.octave;
-        keyboardSynth.triggerAttack(note+octave);
-    });
-    key.addEventListener("mouseleave", e => {
-        e.target.classList.remove("activeKey");
-        let note = e.target.dataset.note;
-        let octave = e.target.parentElement.parentElement.dataset.octave;
-        keyboardSynth.triggerRelease(note+octave);
+        keyboardSynth.triggerAttackRelease(note+octave);
     });
 });
