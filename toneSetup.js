@@ -39,6 +39,14 @@ let polySynth = new Tone.PolySynth(Tone.Synth, {
   }
 });
 
+///////// Sampler
+/* let sampler = new Tone.Sampler({
+    urls: {
+        D2: "mel_low_d.wav"
+    },
+    baseUrl: "./assets/audioSamples/"
+}).toDestination(); */
+
 ///////// Audio Effects
 let autoPanner = new Tone.AutoPanner("8n").start();
 autoPanner.set({ wet: 0.15 });
