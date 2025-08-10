@@ -2,7 +2,6 @@
 ///////// Global definitions
 ////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
-
 ////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 ///////// Intro Modal popup
 ////////////////////////////////////////////////////////////////////////////////////////////////////////////////
@@ -21,71 +20,64 @@ document.getElementById("dialogCloseButton").addEventListener("click", () => {
 introModal.addEventListener("close", toneInit);
 
 ////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-/////////
+///////// Oscillator Functions
 ////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-let acceptedOscTypes = [
-  "fatsine",
-	"fatsquare",
-	"fatsawtooth",
-	"fattriangle"
-]
+let acceptedOscTypes = ["fatsine", "fatsquare", "fatsawtooth", "fattriangle"];
 
-function changeOscillatorType(newOscType){
+function changeOscillatorType(newOscType) {
   /* check to see if parameter matches one of the accepted types in the above array */
-  if (acceptedOscTypes.includes(newOscType)){
+  if (acceptedOscTypes.includes(newOscType)) {
     polySynth.set({
-      oscillator : { type: newOscType }
+      oscillator: { type: newOscType },
     });
   }
 }
 
-////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-/////////
-////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-let acceptedFilterTypes = [
-  "lowpass",
-  "highpass",
-  "bandpass",
-  "notch"
-]
-
-function changeFilterType(newFilterType){
-  /* check to see if parameter matches one of the accepted types in the above array */
-  if (acceptedFilterTypes.includes(newFilterType)){
-    filter.set({
-      type: newFilterType
-    });
-  }
-}
-
-function changeFilterFreq(newFilterFreq){
-  /* check to see if parameter within expected range */
-  if ( newFilterFreq >= 0 && newFilterFreq < 20000){
-    filter.frequency.value = newFilterFreq;
-  }
-}
-
-function changeFilterQ(newFilterQ){
-  /* check to see if parameter within expected range */
-  if ( newFilterQ >= 0 && newFilterQ < 20){
-    filter.Q.value = newFilterQ;
-  }
-}
-
-function changeDistortionAmount(newDistAmt){
-  /* check to see if parameter within expected range */
-  if ( newDistAmt >= 0 && newDistAmt < 1){
-    distortion.set({ distortion: newDistAmt });
-  }
-}
-
-function changeDetuneSpread(newSpreadAmt){
+function changeDetuneSpread(newSpreadAmt) {
   /* make sure parameter is an int : note this rounds DOWN */
   let roundedSpread = Math.floor(newSpreadAmt);
   polySynth.set({
     oscillator: {
-      spread: roundedSpread
-    }
+      spread: roundedSpread,
+    },
   });
 }
 
+////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+///////// Filter Functions
+////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+let acceptedFilterTypes = ["lowpass", "highpass", "bandpass", "notch"];
+
+function changeFilterType(newFilterType) {
+  /* check to see if parameter matches one of the accepted types in the above array */
+  if (acceptedFilterTypes.includes(newFilterType)) {
+    filter.set({
+      type: newFilterType,
+    });
+  }
+}
+
+function changeFilterFreq(newFilterFreq) {
+  /* check to see if parameter within expected range */
+  if (newFilterFreq >= 0 && newFilterFreq < 20000) {
+    filter.frequency.value = newFilterFreq;
+  }
+}
+
+function changeFilterQ(newFilterQ) {
+  /* check to see if parameter within expected range */
+  if (newFilterQ >= 0 && newFilterQ < 20) {
+    filter.Q.value = newFilterQ;
+  }
+}
+
+////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+///////// Oscillator Functions
+////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+
+function changeDistortionAmount(newDistAmt) {
+  /* check to see if parameter within expected range */
+  if (newDistAmt >= 0 && newDistAmt < 1) {
+    distortion.set({ distortion: newDistAmt });
+  }
+}

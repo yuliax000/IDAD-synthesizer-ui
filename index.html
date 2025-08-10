@@ -14,9 +14,9 @@
   <link rel="stylesheet" href="style.css">
 
   <!-- Import our JS files -->
-  <!-- As these reference to DOM elements, we want to load them after it has loaded, so we use the defern property -->
+  <!-- As these reference to DOM elements, we want to load them after it has loaded, so we use the defer property -->
   <!-- https://developer.mozilla.org/en-US/docs/Web/API/HTMLScriptElement/defer -->
-   <!-- This first script has some functions for generic tasks -->
+  <!-- This first script has some functions for generic tasks -->
    <script src="helperFunctions.js" defer></script>
   <!-- This second script initialises the audio synthesizer system using tone -->
   <script src="toneSetup.js" defer></script>
@@ -47,12 +47,10 @@
       <button id="dialogCloseButton" autofocus>OK</button>
     </dialog>
 
-    <h1>Synth UI Template</h1>
-
     <!-- Keyboard Controller -->
-    <div class="keyboardBox">
-      <div class="keyboardOctave" data-octave="2">
-        <div class="whiteKeyBox">
+    <div class="keyboardCont">
+      <div class="octaveCont">
+        <div class="whiteKeyCont">
           <button class="whiteKey" data-note="c"></button>
           <button class="whiteKey" data-note="d"></button>
           <button class="whiteKey" data-note="e"></button>
@@ -61,62 +59,18 @@
           <button class="whiteKey" data-note="a"></button>
           <button class="whiteKey" data-note="b"></button>
         </div>
-        <div class="blackKeyBox">
-          <div class="blackKeySpace"></div>
+        <div class="blackKeyCont">
+          <div class="ghostKey"></div>
           <button class="blackKey" data-note="c#"></button>
           <button class="blackKey" data-note="d#"></button>
-          <div class="blackKeySpace"></div>
-          <div class="blackKeySpace"></div>
+          <div class="ghostKey"></div>
+          <div class="ghostKey"></div>
           <button class="blackKey" data-note="f#"></button>
           <button class="blackKey" data-note="g#"></button>
           <button class="blackKey" data-note="a#"></button>
-          <div class="blackKeySpace"></div>
+          <div class="ghostKey"></div>
         </div>
-      </div>      
-      <div class="keyboardOctave" data-octave="3">
-        <div class="whiteKeyBox">
-          <button class="whiteKey" data-note="c"></button>
-          <button class="whiteKey" data-note="d"></button>
-          <button class="whiteKey" data-note="e"></button>
-          <button class="whiteKey" data-note="f"></button>
-          <button class="whiteKey" data-note="g"></button>
-          <button class="whiteKey" data-note="a"></button>
-          <button class="whiteKey" data-note="b"></button>
-        </div>
-        <div class="blackKeyBox">
-          <div class="blackKeySpace"></div>
-          <button class="blackKey" data-note="c#"></button>
-          <button class="blackKey" data-note="d#"></button>
-          <div class="blackKeySpace"></div>
-          <div class="blackKeySpace"></div>
-          <button class="blackKey" data-note="f#"></button>
-          <button class="blackKey" data-note="g#"></button>
-          <button class="blackKey" data-note="a#"></button>
-          <div class="blackKeySpace"></div>
-        </div>
-      </div>      
-      <div class="keyboardOctave" data-octave="4">
-        <div class="whiteKeyBox">
-          <button class="whiteKey" data-note="c"></button>
-          <button class="whiteKey" data-note="d"></button>
-          <button class="whiteKey" data-note="e"></button>
-          <button class="whiteKey" data-note="f"></button>
-          <button class="whiteKey" data-note="g"></button>
-          <button class="whiteKey" data-note="a"></button>
-          <button class="whiteKey" data-note="b"></button>
-        </div>
-        <div class="blackKeyBox">
-          <div class="blackKeySpace"></div>
-          <button class="blackKey" data-note="c#"></button>
-          <button class="blackKey" data-note="d#"></button>
-          <div class="blackKeySpace"></div>
-          <div class="blackKeySpace"></div>
-          <button class="blackKey" data-note="f#"></button>
-          <button class="blackKey" data-note="g#"></button>
-          <button class="blackKey" data-note="a#"></button>
-          <div class="blackKeySpace"></div>
-        </div>
-      </div>      
+      </div>
     </div>
 
     </div>

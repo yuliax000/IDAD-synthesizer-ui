@@ -13,7 +13,7 @@ let polySynth = new Tone.PolySynth(Tone.Synth, {
     sustain: 0.5,
     release: 0.1,
     attackCurve: "exponential",
-  }
+  },
 });
 
 ////////////////////////////////////////////////////////////////////////////////////////////////////////////////
@@ -46,13 +46,9 @@ const meter = new Tone.Meter();
 ///////// Init Function
 // This gets triggered when the user closes the dialog element
 // It will connect the polysynth => filter => distortion => meter => audio output
-function toneInit(){
+function toneInit() {
   polySynth.chain(filter, distortion, meter, Tone.Destination);
+  // This is an alternative statement if the sampler is instead chosen : the only difference is the variable name
+  // The sampler above must be uncommented for this to work
+  // sampler.chain(filter, distortion, meter, Tone.Destination);
 }
-///////// Init Function
-// This is an alternative function if the sampler is instead chosen : the only difference is the variable name
-/* 
-function toneInit(){
-  sampler.chain(filter, distortion, meter, Tone.Destination);
-}
-*/

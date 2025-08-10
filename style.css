@@ -1,12 +1,15 @@
 /* .:*~*:._.:*~*:._.:*~*:._.:*~*:._.:*~*:._.:*~*:._.:*~*:._.:*~*:._.:*~*:. .:*~*:._.:*~*:._.:*~*:._.:*~*:._.:*~*:._.:*~*:._.:*~*:._.:*~*:._.:*~*:.  */
 /* Font Imports */
 
-@import url('https://fonts.googleapis.com/css2?family=Work+Sans:ital,wght@0,100..900;1,100..900&display=swap');
+@import url("https://fonts.googleapis.com/css2?family=Work+Sans:ital,wght@0,100..900;1,100..900&display=swap");
 
 /* .:*~*:._.:*~*:._.:*~*:._.:*~*:._.:*~*:._.:*~*:._.:*~*:._.:*~*:._.:*~*:. .:*~*:._.:*~*:._.:*~*:._.:*~*:._.:*~*:._.:*~*:._.:*~*:._.:*~*:._.:*~*:.  */
 /* CSS Reset : based on Kevin Powell's code */
 /* https://youtu.be/2lyDv0wOQuQ?si=VtGSWSv8WB0flLd1 */
-*, *::before, *::after {
+
+*,
+*::before,
+*::after {
   box-sizing: border-box;
 }
 
@@ -23,7 +26,10 @@ body {
   min-height: 100vh;
 }
 
-img, picture, svg, video {
+img,
+picture,
+svg,
+video {
   display: block;
   max-width: 100%;
 }
@@ -32,10 +38,10 @@ img, picture, svg, video {
 /* Storing custom CSS properties */
 /* https://developer.mozilla.org/en-US/docs/Web/CSS/CSS_cascading_variables/Using_CSS_custom_properties */
 
-
 /* .:*~*:._.:*~*:._.:*~*:._.:*~*:._.:*~*:._.:*~*:._.:*~*:._.:*~*:._.:*~*:. .:*~*:._.:*~*:._.:*~*:._.:*~*:._.:*~*:._.:*~*:._.:*~*:._.:*~*:._.:*~*:.  */
 /* Intro Modal dialog */
 /* need to apply to open dialog, otherwise flex interferes with closing */
+
 dialog[open] {
   margin: auto; /* place in centre */
   padding: 1rem;
@@ -48,11 +54,15 @@ dialog[open] {
   gap: 1rem;
 }
 dialog::backdrop {
-  background-color: rgba(0, 0, 0, 0.5); /* background overlay when modal is open */
+  background-color: rgba(
+    0,
+    0,
+    0,
+    0.5
+  ); /* background overlay when modal is open */
 }
 #dialogCloseButton {
   /* background-color: var(--col01); */
   /* color: var(--col02); */
   padding: 0 1rem;
 }
-
