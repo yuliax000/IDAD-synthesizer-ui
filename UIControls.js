@@ -44,6 +44,46 @@ function changeDetuneSpread(newSpreadAmt) {
 }
 
 ////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+///////// Amp Functions
+////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+
+function changeAmpAttack(newAttack){
+  polySynth.set({
+    envelope: {
+      attack: newAttack
+    }
+  });
+}
+function changeAmpDecay(newDecay){
+  polySynth.set({
+    envelope: {
+      decay: newDecay
+    }
+  });
+}
+function changeAmpSustain(newSustain){
+  polySynth.set({
+    envelope: {
+      sustain: newSustain
+    }
+  });
+}
+function changeAmpAttack(newRelease){
+  polySynth.set({
+    envelope: {
+      release: newRelease
+    }
+  });
+}
+
+function changeDistortionAmount(newDistAmt) {
+  /* check to see if parameter within expected range */
+  if (newDistAmt >= 0 && newDistAmt < 1) {
+    distortion.set({ distortion: newDistAmt });
+  }
+}
+
+////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 ///////// Filter Functions
 ////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 let acceptedFilterTypes = ["lowpass", "highpass", "bandpass", "notch"];
@@ -71,13 +111,3 @@ function changeFilterQ(newFilterQ) {
   }
 }
 
-////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-///////// Oscillator Functions
-////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-
-function changeDistortionAmount(newDistAmt) {
-  /* check to see if parameter within expected range */
-  if (newDistAmt >= 0 && newDistAmt < 1) {
-    distortion.set({ distortion: newDistAmt });
-  }
-}

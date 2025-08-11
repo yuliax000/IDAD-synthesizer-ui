@@ -49,6 +49,6 @@ const meter = new Tone.Meter();
 function toneInit() {
   polySynth.chain(filter, distortion, meter, Tone.Destination);
   // This is an alternative statement if the sampler is instead chosen : the only difference is the variable name
-  // The sampler above must be uncommented for this to work
+  // The sampler above must be uncommented for this to work, as well as the declaration on line 3 of keyboardController.js
   // sampler.chain(filter, distortion, meter, Tone.Destination);
 }
