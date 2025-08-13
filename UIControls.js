@@ -2,7 +2,7 @@
 ///////// Global definitions
 ////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
-//let testRange = document.getElementById("");
+let testRange = document.getElementById("frequencySlider");
 
 ////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 ///////// Intro Modal popup
@@ -49,32 +49,32 @@ function changeDetuneSpread(newSpreadAmt) {
 ///////// Amp Functions
 ////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
-function changeAmpAttack(newAttack){
+function changeAmpAttack(newAttack) {
   polySynth.set({
     envelope: {
-      attack: newAttack
-    }
+      attack: newAttack,
+    },
   });
 }
-function changeAmpDecay(newDecay){
+function changeAmpDecay(newDecay) {
   polySynth.set({
     envelope: {
-      decay: newDecay
-    }
+      decay: newDecay,
+    },
   });
 }
-function changeAmpSustain(newSustain){
+function changeAmpSustain(newSustain) {
   polySynth.set({
     envelope: {
-      sustain: newSustain
-    }
+      sustain: newSustain,
+    },
   });
 }
-function changeAmpAttack(newRelease){
+function changeAmpAttack(newRelease) {
   polySynth.set({
     envelope: {
-      release: newRelease
-    }
+      release: newRelease,
+    },
   });
 }
 
@@ -117,6 +117,7 @@ function changeFilterQ(newFilterQ) {
 ///////// Connections
 ////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
-// testRange.addEventListener("input", (e) => {
-//   let rangeValue = e.target.value;
-// });
+testRange.addEventListener("input", (e) => {
+  let rangeValue = e.target.value;
+  changeFilterFreq(rangeValue);
+});

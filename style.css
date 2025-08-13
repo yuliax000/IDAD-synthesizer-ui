@@ -38,6 +38,20 @@ video {
 /* Storing custom CSS properties */
 /* https://developer.mozilla.org/en-US/docs/Web/CSS/CSS_cascading_variables/Using_CSS_custom_properties */
 
+:root {
+  --col01: rgb(194, 113, 113);
+  --col02: rgb(132, 190, 129);
+  --border: solid 1rem var(--col02);
+}
+
+@media (prefers-color-scheme: light) {
+  :root {
+    --col02: rgb(194, 113, 113);
+    --col01: rgb(132, 190, 129);
+    --border: solid 1rem var(--col01);
+  }
+}
+
 /* .:*~*:._.:*~*:._.:*~*:._.:*~*:._.:*~*:._.:*~*:._.:*~*:._.:*~*:._.:*~*:. .:*~*:._.:*~*:._.:*~*:._.:*~*:._.:*~*:._.:*~*:._.:*~*:._.:*~*:._.:*~*:.  */
 /* Intro Modal dialog */
 /* need to apply to open dialog, otherwise flex interferes with closing */
@@ -48,6 +62,9 @@ dialog[open] {
   /* background-color: var(--col01); */
   /* color: var(--col02); */
   /* border: var(--border); */
+  background-color: var(--col01);
+  color: var(--col02);
+  border: var(--border);
   display: flex;
   flex-direction: column;
   align-items: center;
@@ -65,4 +82,150 @@ dialog::backdrop {
   /* background-color: var(--col01); */
   /* color: var(--col02); */
   padding: 0 1rem;
+}
+
+/* this is my own keyboard ui */
+.keyboardCont {
+  height: 10rem;
+  display: flex;
+}
+.octaveCont {
+  width: 15rem;
+  position: relative;
+}
+.whiteKeyCont {
+  display: flex;
+  height: 100%;
+  width: 100%;
+  align-items: stretch;
+}
+.whiteKey {
+  flex: 1;
+  padding: 0;
+  background-color: antiquewhite;
+}
+.whiteKey:hover {
+  cursor: pointer;
+}
+.whiteKey:active {
+  filter: invert();
+}
+.blackKeyCont {
+  position: absolute;
+  top: 0;
+  display: flex;
+  height: 55%;
+  width: 100%;
+  align-items: stretch;
+  pointer-events: none;
+}
+.blackKey {
+  flex: 1;
+  padding: 0;
+  pointer-events: all;
+  background-color: rgb(51, 81, 60);
+}
+.blackKey:hover {
+  cursor: pointer;
+}
+.blackKey:active {
+  filter: invert();
+}
+.ghostKey {
+  flex: 0.5;
+}
+
+/* input[type="range"] { */
+/* writing-mode: vertical-rl; */
+/* } */
+
+input[type="range"] {
+  width: 100%;
+  margin: 13.8px 0;
+  background-color: transparent;
+  -webkit-appearance: none;
+}
+input[type="range"]:focus {
+  outline: none;
+}
+input[type="range"]::-webkit-slider-runnable-track {
+  background: #b271a9;
+  border: 0.2px solid #010101;
+  border-radius: 1.3px;
+  width: 100%;
+  height: 8.4px;
+  cursor: pointer;
+}
+input[type="range"]::-webkit-slider-thumb {
+  margin-top: -14px;
+  width: 18px;
+  height: 36px;
+  background: #ffb9af;
+  border: 0.4px solid rgba(104, 89, 138, 0.6);
+  border-radius: 3px;
+  cursor: pointer;
+  -webkit-appearance: none;
+}
+input[type="range"]:focus::-webkit-slider-runnable-track {
+  background: #bb82b3;
+}
+input[type="range"]::-moz-range-track {
+  background: #b271a9;
+  border: 0.2px solid #010101;
+  border-radius: 1.3px;
+  width: 100%;
+  height: 8.4px;
+  cursor: pointer;
+}
+input[type="range"]::-moz-range-thumb {
+  width: 18px;
+  height: 36px;
+  background: #ffb9af;
+  border: 0.4px solid rgba(104, 89, 138, 0.6);
+  border-radius: 3px;
+  cursor: pointer;
+}
+input[type="range"]::-ms-track {
+  background: transparent;
+  border-color: transparent;
+  border-width: 15.2px 0;
+  color: transparent;
+  width: 100%;
+  height: 8.4px;
+  cursor: pointer;
+}
+input[type="range"]::-ms-fill-lower {
+  background: #a9609f;
+  border: 0.2px solid #010101;
+  border-radius: 2.6px;
+}
+input[type="range"]::-ms-fill-upper {
+  background: #b271a9;
+  border: 0.2px solid #010101;
+  border-radius: 2.6px;
+}
+input[type="range"]::-ms-thumb {
+  width: 18px;
+  height: 36px;
+  background: #ffb9af;
+  border: 0.4px solid rgba(104, 89, 138, 0.6);
+  border-radius: 3px;
+  cursor: pointer;
+  margin-top: 0px;
+  /*Needed to keep the Edge thumb centred*/
+}
+input[type="range"]:focus::-ms-fill-lower {
+  background: #b271a9;
+}
+input[type="range"]:focus::-ms-fill-upper {
+  background: #bb82b3;
+}
+/*TODO: Use one of the selectors from https://stackoverflow.com/a/20541859/7077589 and figure out
+how to remove the virtical space around the range input in IE*/
+@supports (-ms-ime-align: auto) {
+  /* Pre-Chromium Edge only styles, selector taken from hhttps://stackoverflow.com/a/32202953/7077589 */
+  input[type="range"] {
+    margin: 0;
+    /*Edge starts the margin from the thumb, not the track as other browsers do*/
+  }
 }
