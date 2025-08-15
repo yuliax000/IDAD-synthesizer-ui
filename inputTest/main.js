@@ -1,12 +1,10 @@
-
-
-
 ///////////// Button
 
 let buttonOutputText = document.getElementById("buttonOutput");
 let buttonEventText = document.getElementById("currentButtonEvent");
 let heldButtonText = document.getElementById("buttonHeldEvent");
 
+/* 
 myButton.addEventListener("mouseenter", () => { 
   buttonEventText.textContent = "mouseenter";
 });
@@ -22,12 +20,10 @@ myButton.addEventListener("mousedown", () => {
 myButton.addEventListener("mouseup", () => { 
   buttonEventText.textContent = "mouseup";
 });
-
+ */
 ///////////// Checkbox
 let myCheckbox = document.getElementById("exampleCheckbox");
-let myCheckboxTestButton = document.getElementById("checkboxTestButton");
 let checkboxOutputText = document.getElementById("checkboxOutput");
-let checkboxTestOutputText = document.getElementById("checkboxTestOutput");
 let checkboxCheckedText = document.getElementById("checkboxChecked");
 
 myCheckbox.addEventListener("change", (e) => {
@@ -35,10 +31,13 @@ myCheckbox.addEventListener("change", (e) => {
   checkboxCheckedText.textContent = e.target.checked;
 });
 
-myCheckboxTestButton.addEventListener("click", () => {
-  checkboxTestOutputText.textContent = "blue";
-  checkboxTestOutputText.style.color = "blue";
-  checkboxTestOutputText.style.textDecoration = "underline";
+///////////// Checkbox Effects
+let distCheckbox = document.getElementById("checkDist");
+let verbCheckbox = document.getElementById("checkVerb");
+
+distCheckbox.addEventListener("click", (e) => {
+  let isChecked = e.target.checked;
+  toggleDistortion(isChecked);
 });
 
 ///////////// Radio

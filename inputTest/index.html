@@ -9,6 +9,12 @@
 
   <link rel="stylesheet" href="style.css">
 
+  <script src="http://unpkg.com/tone"></script>
+
+  <!-- we can import our script from the folder above so we can access it's synth -->
+  <script src="../helperFunctions.js" defer></script>
+  <script src="../toneSetup.js" defer></script>
+  <script src="../UIControls.js" defer></script>
   <script src="main.js" defer></script>
   <script src="xyControllerSetup.js" defer></script>
 
@@ -21,7 +27,12 @@
 
 <body>
 
-  <h1>HTML Input Mapping Examples</h1>
+  <dialog id="introDialog">
+    <p>This synthesizer will make some noise, please check your system's volume setting.</p>
+    <button id="dialogCloseButton" autofocus>OK</button>
+  </dialog>
+
+  <h1>HTML Input Mapping Exercise</h1>
 
   <button id="exampleButton">Button</button>
 
@@ -34,31 +45,24 @@
 
   <input type="checkbox" id="exampleCheckbox" name="testCheckbox" value="" />
   <label for="exampleCheckbox">Click to find out value</label>
-  <fieldset>
-    <legend>Text Style:</legend>
-
-    <div>
-      <input type="checkbox" id="checkColor" name="checkColor" />
-      <label for="checkColor">Red Text</label>
-    </div>
-
-    <div>
-      <input type="checkbox" id="checkUnderline" name="checkUnderline" />
-      <label for="checkUnderline">Horns</label>
-    </div>
-</fieldset>
-  <input type="checkbox" id="exampleCheckbox" name="testCheckbox" value="" />
-  <label for="exampleCheckbox">Click to find out value</label>
-  <input type="checkbox" id="exampleCheckbox" name="testCheckbox" value="" />
-  <label for="exampleCheckbox">Click to find out value</label>
 
   <p id="checkboxOutput"></p>
 
   <p>This checkbox is checked? <span id="checkboxChecked"></span></p>
 
-  <button id="checkboxTestButton">Print Colour</button>
+  <fieldset>
+    <legend>Audio Effects:</legend>
 
-  <p id="checkboxTestOutput"></p>
+    <div>
+      <input type="checkbox" id="checkDist" name="checkDist" />
+      <label for="checkDist">Distortion</label>
+    </div>
+
+    <div>
+      <input type="checkbox" id="checkVerb" name="checkVerb" />
+      <label for="checkVerb">Reverb</label>
+    </div>
+  </fieldset>
 
   <!-- For a super detailed article on styling checkboxes see link -->
   <!-- https://moderncss.dev/pure-css-custom-checkbox-style/ -->
@@ -84,13 +88,7 @@
 
   <p>*Radio button behaviour notes*</p>
 
-  <input type="range" id="exampleRange" />
-  
-  <p id="rangeOutput"></p>
-
-  <p>*Range slider behaviour notes*</p>
-
-  <label for="pet-select">Choose a pet:</label>
+  <label for="pet-select">Choose a waveform:</label>
 
   <select name="pets" id="pet-select">
     <option value="">--Please choose an option--</option>
@@ -103,23 +101,18 @@
   </select>
 
   <p id="selectOutput"></p>
+  
+  <input type="range" id="exampleRange" />
+  
+  <p id="rangeOutput"></p>
+
+  <p>*Range slider behaviour notes*</p>
 
   <input type="number" />
   
   <p id="numberOutput"></p>
 
   <p>*Number behaviour notes*</p>
-
-  <!-- example from https://developer.mozilla.org/en-US/docs/Web/HTML/Reference/Elements/input/text#specifying_a_pattern -->
-  <label>Choose a username:</label>
-
-  <!-- min max length -->
-  <!-- pattern using regex -->
-  <input type="text" id="uname" required pattern="[a-z]{4,8}" />
-
-  <span class="validity"></span>
-
-  <p>*Text behaviour notes*</p>
 
   <input type="color" id="exampleColourPicker" />
   
