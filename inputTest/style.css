@@ -1,0 +1,20 @@
+select {
+  display: block;
+  margin-bottom: 1rem;
+}
+
+input:invalid + span::after {
+  position: absolute;
+  content: "✖";
+  padding-left: 5px;
+}
+input:valid + span::after {
+  position: absolute;
+  content: "✓";
+  padding-left: 5px;
+}
+
+.xyControlBox {
+  width: 15rem; height: 15rem;
+  background-color: grey;
+}
