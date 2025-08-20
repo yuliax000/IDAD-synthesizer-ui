@@ -20,3 +20,26 @@ An input of 0.43 would output 0.43
 function clamp(value, min, max){
   return Math.min(Math.max(value, min), max);
 }
+
+/* 
+This takes in a keycode and returns a note for the synth
+*/
+
+let keyCodeToNote = {
+  KeyA: "c3",
+  KeyW: "c#3",
+  KeyS: "d3",
+  KeyE: "d#3",
+  KeyD: "e3",
+  KeyF: "f3",
+  KeyT: "f#3",
+  KeyG: "g3",
+  KeyY: "g#3",
+  KeyH: "a3",
+  KeyU: "a#3",
+  KeyJ: "b3",
+  KeyK: "c4",
+  KeyO: "c#4",
+  KeyL: "d4",
+  KeyP: "d#4",
+}

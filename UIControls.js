@@ -78,12 +78,48 @@ function changeAmpAttack(newRelease) {
   });
 }
 
+////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+///////// Distortion Functions
+////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+
 function changeDistortionAmount(newDistAmt) {
   /* check to see if parameter within expected range */
   if (newDistAmt >= 0 && newDistAmt < 1) {
     distortion.set({ distortion: newDistAmt });
   }
 }
+
+function toggleDistortion(distortionOn){
+  if(distortionOn){
+    distortion.wet.value = 1;
+  } else {
+    distortion.wet.value = 0;
+  }
+}
+
+/* set initial amount and bypass it */
+changeDistortionAmount(0.9);
+toggleDistortion(false);
+
+////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+///////// Reverb Functions
+////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+
+function changeReverbDecay(newVerbDecayAmt) {
+  reverb.set({ decay: newVerbDecayAmt });
+}
+
+function toggleReverb(verbOn){
+  if(verbOn){
+    reverb.wet.value = 1;
+  } else {
+    reverb.wet.value = 0;
+  }
+}
+
+/* set initial amount and bypass it */
+changeReverbDecay(2);
+toggleReverb(false);
 
 ////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 ///////// Filter Functions
