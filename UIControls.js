@@ -4,6 +4,9 @@
 
 let testRange = document.getElementById("frequencySlider");
 
+const delayFeedbackSlider = document.getElementById(delayFeedbackSlider);
+const volumeFeedbackDisplay = document.getElementById(volumeFeedback);
+
 ////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 ///////// Intro Modal popup
 ////////////////////////////////////////////////////////////////////////////////////////////////////////////////
@@ -89,8 +92,8 @@ function changeDistortionAmount(newDistAmt) {
   }
 }
 
-function toggleDistortion(distortionOn){
-  if(distortionOn){
+function toggleDistortion(distortionOn) {
+  if (distortionOn) {
     distortion.wet.value = 1;
   } else {
     distortion.wet.value = 0;
@@ -109,8 +112,8 @@ function changeReverbDecay(newVerbDecayAmt) {
   reverb.set({ decay: newVerbDecayAmt });
 }
 
-function toggleReverb(verbOn){
-  if(verbOn){
+function toggleReverb(verbOn) {
+  if (verbOn) {
     reverb.wet.value = 1;
   } else {
     reverb.wet.value = 0;
@@ -148,6 +151,33 @@ function changeFilterQ(newFilterQ) {
     filter.Q.value = newFilterQ;
   }
 }
+
+////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+///////// Delay Functions
+////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+
+function changeDelayFeedback(newFeedbackAmt) {
+  delay.feedback.value = newFeedbackAmt;
+}
+delayFeedbackSlider.addEventListener("change", (e) => {
+  let inputValue = e.target.value;
+  changeDelayFeedback(inputValue);
+});
+
+////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+///////// meter feedback
+////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+
+function findCurrentVolume() {
+  let currentVolume = meter.getValue();
+  let clampedValue = clamp(currentVolume, -80, 0);
+  let remappedValue = remapRange(clampedValue, -80, 0, 0, 100);
+  volumeFeedbackDisplay.textContent = remappedValue;
+  console.log(remappedValue);
+  document.body.style.backgroundColor = `color-mix(in hsl, red, blue ${remappedValue}%)`;
+}
+
+setInterval(findCurrentVolume, 200);
 
 ////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 ///////// Connections

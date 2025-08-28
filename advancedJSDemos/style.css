@@ -1,14 +1,14 @@
-@import url('https://fonts.googleapis.com/css2?family=Work+Sans:ital,wght@0,100..900;1,100..900&display=swap');
+@import url("https://fonts.googleapis.com/css2?family=Work+Sans:ital,wght@0,100..900;1,100..900&display=swap");
 
-*{
+* {
   box-sizing: border-box;
 }
 
-:root{
-/* Paperback-2 Palette Created by Doph */
-/* https://lospec.com/palette-list/paperback-2 */
-  --col02: #de5925;
-  --col01: #289033;
+:root {
+  /* Paperback-2 Palette Created by Doph */
+  /* https://lospec.com/palette-list/paperback-2 */
+  --col02: #e7b173;
+  --col01: #1f7527;
   --border: solid 12px var(--col01);
 }
 
@@ -22,28 +22,28 @@ body {
   gap: 1rem;
 }
 
-button{
+button {
   background-color: var(--col02);
   color: var(--col01);
   border-style: double;
   font-size: 1.25rem;
 }
-button:active{
+button:active {
   filter: invert();
 }
 
-.randomResult{
-  width: 1.25rem; height: 1.25rem;
+.randomResult {
+  width: 1.25rem;
+  height: 1.25rem;
   background-color: var(--col02);
   color: var(--col01);
   border: 2px white double;
   font-size: 1.25rem;
 }
 
-fieldset{
+fieldset {
   display: flex;
   flex-direction: column;
   width: 45rem;
   font-size: 1.25rem;
 }
-
