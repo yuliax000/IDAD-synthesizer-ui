@@ -8,3 +8,13 @@ xyControllers.forEach((xyBox) => {
     svgCTM = xyBox.querySelector(".xySVGEl").getScreenCTM();
   });
 });
+
+let markerXPos,
+  markerYPos = 3;
+let dragging = false;
+
+function startxyDrag() {
+  document.body.classList.add("drag-active");
+  document.addEventListener("mousemove", xyDragging);
+  document;
+}

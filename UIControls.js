@@ -177,6 +177,7 @@ function findCurrentVolume() {
   document.body.style.backgroundColor = `color-mix(in hsl, red, blue ${remappedValue}%)`;
 }
 
+
 setInterval(findCurrentVolume, 200);
 
 ////////////////////////////////////////////////////////////////////////////////////////////////////////////////
