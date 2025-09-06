@@ -3,13 +3,26 @@ let yOutputText = document.getElementById("yPosOutput");
 let xyControllers = Array.from(document.getElementsByClassName("xyControlBox"));
 xyControllers.forEach((xyBox) => {
   let xyPosMarker = xyBox.querySelector(".xyPosMarker");
-  let svgCTM = xyBox.querySelector(".xySVGEl").getScreenCTM();
+  // let svgCTM = xyBox.querySelector(".xySVGEl").getScreenCTM();
+  // window.addEventListener("resize", () => {
+  //   svgCTM = xyBox.querySelector(".xySVGEl").getScreenCTM();
+  // });
+
+  function updateViewBox(svgAdjust) {
+    svgAdjust.setAttribute(
+      "viewBox",
+      `0 0 ${window.innerWidth} ${window.innerHeight}`
+    );
+  }
+  let xySVG = document.querySelector(".xySVGEl");
+  updateViewBox(xySVG);
+
   window.addEventListener("resize", () => {
-    svgCTM = xyBox.querySelector(".xySVGEl").getScreenCTM();
+    updateViewBox(xySVG);
   });
 
-  let markerXPos = 3,
-    markerYPos = 3;
+  let markerXPos = 500,
+    markerYPos = 500;
   let dragging = false;
 
   function startxyDrag() {
@@ -20,8 +33,8 @@ xyControllers.forEach((xyBox) => {
   function xyDragging(e) {
     if (!dragging) {
       window.requestAnimationFrame(() => {
-        markerXPos = clamp((e.clientX - svgCTM.e) / svgCTM.a, 0, 1000);
-        markerYPos = clamp((e.clientY - svgCTM.f) / svgCTM.d, 0, 1000);
+        markerXPos = clamp(e.clientX, 0, window.innerWidth);
+        markerYPos = clamp(e.clientY, 0, window.innerHeight);
         xyPosMarker.setAttribute("cx", markerXPos);
         xyPosMarker.setAttribute("cy", markerYPos);
 
@@ -42,13 +55,13 @@ xyControllers.forEach((xyBox) => {
   xyBox.addEventListener("mousedown", startxyDrag);
   xyBox.addEventListener("mousedown", xyDragging);
 });
-// function newXValue(value) {
-//   xOutputText.textContent = value;
-// }
-// function newYValue(value) {
-//   yOutputText.textContent = value;
-// }
+function newXValue(value) {
+  xOutputText.textContent = value;
+}
+function newYValue(value) {
+  yOutputText.textContent = value;
+}
 
 function clamp(value, min, max) {
-  return Math.min(Math.max(value.min), max);
+  return Math.min(Math.max(value, min), max);
 }
