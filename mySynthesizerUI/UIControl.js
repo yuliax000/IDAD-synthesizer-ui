@@ -7,6 +7,6 @@ xyPad.addEventListener("click", (e) => {
 
 const volumeSlider = document.getElementById("volumeSlider");
 volumeSlider.addEventListener("input", (e) => {
-  gainNode.gain.value = e.target.value / 100;
+  gainNode.gain.value = e.target.value;
   console.log("volumeNow", gainNode.gain.value);
 });

@@ -125,3 +125,11 @@ how to remove the virtical space around the range input in IE*/
   height: 20px;
   z-index: 10;
 }
+
+#xyPad {
+  pointer-events: all;
+}
+
+.xyPosMarker {
+  pointer-events: none;
+}
