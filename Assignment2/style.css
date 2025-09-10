@@ -1,0 +1,77 @@
+@import url("https://fonts.googleapis.com/css2?family=Mozilla+Headline:wght@200..700&family=Playfair+Display:ital,wght@0,400..900;1,400..900&family=Playwrite+AU+QLD:wght@100..400&display=swap");
+body {
+  font-family: "Mozilla Headline", sans-serif;
+  background-color: rgb(0, 0, 0);
+  color: rgb(255, 255, 255);
+  padding: 5% 10%;
+  border: 1rem dotted;
+  border-radius: 2rem;
+}
+ul {
+  padding: 0 2rem;
+}
+p {
+  padding: 1rem;
+  color: antiquewhite;
+  flex: 1;
+  width: auto;
+}
+h1 {
+  font-size: 40px;
+  padding: 1rem 0;
+  display: flex;
+  justify-content: center;
+}
+
+nav {
+  display: flex;
+  justify-content: center;
+}
+
+section {
+  padding: 1rem 0;
+}
+li {
+  padding: 1rem 0;
+  margin: auto;
+}
+.actions {
+  color: antiquewhite;
+}
+
+#infoPara {
+  margin: auto;
+  display: flex;
+  justify-content: center;
+}
+
+a:link {
+  background-color: rgb(255, 255, 255);
+  color: rgb(0, 0, 0);
+  padding: 0% 0.5rem;
+  text-align: center;
+  text-decoration: none;
+  border-radius: 1%;
+}
+a:visited {
+  background-color: rgb(255, 255, 255);
+  color: rgb(144, 117, 152);
+  padding: 0% 0.5rem;
+  text-align: center;
+  text-decoration: none;
+  border-radius: 1%;
+}
+
+a:hover {
+  background-color: antiquewhite;
+}
+
+a:active {
+  background-color: rgb(0, 0, 0);
+  color: white;
+}
+
+h3 {
+  display: flex;
+  justify-content: center;
+}

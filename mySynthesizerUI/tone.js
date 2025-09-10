@@ -1,32 +1,34 @@
-const audioCtx = new AudioContext();
+let audioCtx = new AudioContext();
 
 // -----this part use oscillator to generate voice-----
 
 // const oscillator = audioCtx.createOscillator();
 
-const gainNode = audioCtx.createGain();
+let gainNode = audioCtx.createGain();
 gainNode.gain.value = 0.5;
-
 console.log(gainNode);
 
+let activeOsillators = [];
+
+const oscType = ["sine", "square", "triangle", "sawtooth"];
 // oscillator.connect(gainNode).connect(audioCtx.destination);
 // console.log(audioCtx);
 
-xyPad.addEventListener("click", async (e) => {
+xyPad.addEventListener("mousedown", (e) => {
   console.log("click on", e.target);
-  //   if (audioCtx.state === "suspended") {
-  //     await audioCtx.resume();
+  //
   //   }
-  const osc = audioCtx.createOscillator();
-  const filter = audioCtx.createBiquadFilter();
+  if (dragging) return;
+  dragging = true;
+
+  // if (audioCtx.state === "suspended") audioCtx.resume();
+
+  let osc = audioCtx.createOscillator();
+  let filter = audioCtx.createBiquadFilter();
 
   const x = e.clientX;
   const y = e.clientY;
 
-  osc.frequency.value = 200 + (x / window.innerWidth) * 800;
-  console.log("frequecyNow", osc.frequency.value);
-
-  const oscType = ["sine", "square", "triangle", "sawtooth"];
   function oscTypeSelect() {
     let randomNumber = Math.random();
     let randomSelector = Math.floor(oscType.length * randomNumber);
@@ -34,11 +36,19 @@ xyPad.addEventListener("click", async (e) => {
     console.log("oscType", osc.type);
   }
   oscTypeSelect();
+  osc.frequency.setValueAtTime(
+    200 + (x / window.innerWidth) * 800,
+    audioCtx.currentTime
+  );
+  // console.log("frequecyNow", osc.frequency.setValueAtTime);
 
-  filter.frequency.value = 200 + (y / window.innerHeight) * 2000;
-  console.log("filterFrequencyNow", filter.frequency.value);
-  filter.Q.value = (y / window.innerHeight) * 5;
-  console.log("filterQ", filter.Q.value);
+  filter.frequency.setValueAtTime(
+    200 + (y / window.innerHeight) * 2000,
+    audioCtx.currentTime
+  );
+  // console.log("filterFrequencyNow", filter.frequency.value);
+  filter.Q.setValueAtTime((y / window.innerHeight) * 5, audioCtx.currentTime);
+  // console.log("filterQ", filter.Q.value);
   filter.type = "lowpass";
   //   const filterTypes = ["lowpass", "highpass", "bandpass", "peaking"];
   //   function randomFilterTypeSelect() {
@@ -49,13 +59,50 @@ xyPad.addEventListener("click", async (e) => {
   //   console.log("filterType", filter.type);
   //   }
   //   randomFilterTypeSelect();
+  let oscGain = audioCtx.createGain();
+  oscGain.gain.setValueAtTime(0.5, audioCtx.currentTime);
 
-  osc.connect(filter).connect(gainNode).connect(audioCtx.destination);
+  osc
+    .connect(filter)
+    .connect(oscGain)
+    .connect(gainNode)
+    .connect(audioCtx.destination);
 
   osc.start();
-  osc.stop(audioCtx.currentTime + 1);
-  console.log("new osc", osc);
-  console.log(audioCtx.state);
+
+  activeOsillators.push({ osc, filter, oscGain });
+
+  activeOsillators.forEach(({ osc, filter }) => {
+    osc.frequency.setValueAtTime(
+      200 + (x / window.innerWidth) * 800,
+      audioCtx.currentTime
+    );
+
+    filter.frequency.setValueAtTime(
+      200 + (y / window.innerHeight) * 2000,
+      audioCtx.currentTime
+    );
+
+    filter.Q.setValueAtTime((y / window.innerHeight) * 5, audioCtx.currentTime);
+  });
 });
 
-//----trying to use existing mp3 file (if time enough)------
+xyPad.addEventListener("mouseup", () => {
+  if (!dragging) return;
+  dragging = false;
+
+  activeOsillators.forEach(({ osc, oscGain }) => {
+    oscGain.gain.exponentialRampToValueAtTime(0.001, audioCtx.currentTime + 5);
+    osc.stop(audioCtx.currentTime + 5);
+  });
+
+  activeOsillators = [];
+});
+xyPad.addEventListener("mouseleave", () => {
+  if (dragging) {
+    xyPad.dispatchEvent(new Event("mouseup"));
+  }
+});
+
+console.log("new osc", osc);
+console.log(audioCtx.state);

@@ -1,8 +1,10 @@
 const xyPad = document.getElementById("xyPad");
 
+let dragging = false;
+
 const volumeSlider = document.getElementById("volumeSlider");
 volumeSlider.addEventListener("input", (e) => {
-  gainNode.gain.value = e.target.value;
+  gainNode.gain.setValueAtTime(e.target.value, audioCtx.currentTime);
   console.log("volumeNow", gainNode.gain.value);
 });
 
@@ -12,9 +14,28 @@ pauseBtn.addEventListener("click", (e) => {
   e.stopPropagation();
   if (audioCtx.state === "running") {
     audioCtx.suspend();
+    pauseIcon.src = "./assets/icons8-play-60.png";
     console.log("paused");
   } else if (audioCtx.state === "suspended") {
     audioCtx.resume();
+    pauseIcon.src = "./assets/icons8-pause-60.png";
     console.log("Resumed");
   }
+});
+
+let resetBtn = document.getElementById("resetBtn");
+resetBtn.addEventListener("click", (e) => {
+  e.stopPropagation();
+  // close old one
+  if (audioCtx && audioCtx.state !== "closed") {
+    audioCtx.close();
+  }
+  // new one
+  audioCtx = new window.AudioContext();
+  gainNode = audioCtx.createGain();
+  gainNode.gain.value = 0.5;
+  gainNode.connect(audioCtx.destination);
+  volumeSlider.value = 0.5;
+
+  console.log("audio reset", audioCtx.state);
 });
