@@ -8,6 +8,13 @@ volumeSlider.addEventListener("input", (e) => {
   console.log("volumeNow", gainNode.gain.value);
 });
 
+// introModal
+let introModal = document.getElementById("infoDialog");
+document.getElementById("infoDialog").showModal();
+document.getElementById("infoDialogClose").addEventListener("click", () => {
+  introModal.close();
+});
+
 // apply pause button and reset button
 const pauseBtn = document.getElementById("pauseBtn");
 pauseBtn.addEventListener("click", (e) => {
