@@ -11,13 +11,9 @@ console.log(gainNode);
 let activeOsillators = [];
 
 const oscType = ["sine", "square", "triangle", "sawtooth"];
-// oscillator.connect(gainNode).connect(audioCtx.destination);
-// console.log(audioCtx);
 
 xyPad.addEventListener("mousedown", (e) => {
   console.log("click on", e.target);
-  //
-  //   }
   if (dragging) return;
   dragging = true;
 
@@ -85,6 +81,32 @@ xyPad.addEventListener("mousedown", (e) => {
 
     filter.Q.setValueAtTime((y / window.innerHeight) * 5, audioCtx.currentTime);
   });
+  console.log("new osc", osc);
+});
+
+// ---dragging change frequency and filter---
+function updateOsc(e) {
+  const x = e.clientX;
+  const y = e.clientY;
+
+  activeOsillators.forEach(({ osc, filter }) => {
+    osc.frequency.setValueAtTime(
+      200 + (x / window.innerWidth) * 800,
+      audioCtx.currentTime
+    );
+
+    filter.frequency.setValueAtTime(
+      200 + (y / window.innerHeight) * 2000,
+      audioCtx.currentTime
+    );
+
+    filter.Q.setValueAtTime((y / window.innerHeight) * 5, audioCtx.currentTime);
+  });
+}
+xyPad.addEventListener("mousemove", (e) => {
+  if (dragging) {
+    updateOsc(e);
+  }
 });
 
 xyPad.addEventListener("mouseup", () => {
@@ -98,11 +120,11 @@ xyPad.addEventListener("mouseup", () => {
 
   activeOsillators = [];
 });
+
 xyPad.addEventListener("mouseleave", () => {
   if (dragging) {
     xyPad.dispatchEvent(new Event("mouseup"));
   }
 });
 
-console.log("new osc", osc);
 console.log(audioCtx.state);

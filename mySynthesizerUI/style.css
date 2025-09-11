@@ -155,7 +155,7 @@ how to remove the virtical space around the range input in IE*/
 :root {
   --col01: rgb(76, 76, 76);
   --col02: rgb(255, 255, 255);
-  --border: solid 0.5rem var(--col02);
+  --border: solid 0.3rem var(--col02);
 }
 
 dialog[open] {
