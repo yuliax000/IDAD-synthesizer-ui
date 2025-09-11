@@ -1,4 +1,5 @@
 let audioCtx = new AudioContext();
+let xyPosMarker = document.getElementsByClassName("xyPosMarker")[0];
 
 // -----this part use oscillator to generate voice-----
 
@@ -16,6 +17,8 @@ xyPad.addEventListener("mousedown", (e) => {
   console.log("click on", e.target);
   if (dragging) return;
   dragging = true;
+
+  xyPosMarker.setAttribute("fill", "rgba(134, 4, 4, 1)");
 
   // if (audioCtx.state === "suspended") audioCtx.resume();
 
@@ -112,6 +115,8 @@ xyPad.addEventListener("mousemove", (e) => {
 xyPad.addEventListener("mouseup", () => {
   if (!dragging) return;
   dragging = false;
+
+  xyPosMarker.setAttribute("fill", "red");
 
   activeOsillators.forEach(({ osc, oscGain }) => {
     oscGain.gain.exponentialRampToValueAtTime(0.001, audioCtx.currentTime + 5);

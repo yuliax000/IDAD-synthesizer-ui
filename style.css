@@ -171,9 +171,17 @@ dialog[open] {
 }
 
 dialog::backdrop {
-  background-color: #000001;
+  background-color: rgb(0, 0, 0);
 }
 
 #infoDialogClose {
   padding: 0 1rem;
+}
+
+button:hover {
+  cursor: pointer;
+}
+
+button:active {
+  filter: invert();
 }
