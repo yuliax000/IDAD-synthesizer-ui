@@ -1,88 +1,57 @@
 <!DOCTYPE html>
 <html lang="en">
-
-<head>
-
-  <meta charset="utf-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-
-  <!-- Import our external library, Tone.js -->
-  <!-- Note that unlike the other code files we want it to load before anything else so we don't include defer -->
-  <script src="http://unpkg.com/tone"></script>
-
-  <!-- Import our CSS stylesheets -->
-  <link rel="stylesheet" href="style.css">
-
-  <!-- Import our JS files -->
-  <!-- As these reference to DOM elements, we want to load them after it has loaded, so we use the defer property -->
-  <!-- https://developer.mozilla.org/en-US/docs/Web/API/HTMLScriptElement/defer -->
-  <!-- This first script has some functions for generic tasks -->
-   <script src="helperFunctions.js" defer></script>
-  <!-- This second script initialises the audio synthesizer system using tone -->
-  <script src="toneSetup.js" defer></script>
-  <!-- This third script handles sending notes from the keyboard controller to the synthesizer, again kept seperate
-       so that it can be modular -->
-  <script src="keyboardController.js" defer></script>
-  <!-- The last script handles connecting the UI to the synthesizer : this is where you'll be working -->
-  <script src="UIControls.js" defer></script>
-
-  <title>Synth UI Exercise</title>
-
-  <!-- favicon was sourced from favicon.io but the original graphics are copyright 2020 Twitter, Inc 
-       and other contributors -->
-  <!-- They are licensed under CC-BY 4.0 as linked below -->
-  <!-- https://creativecommons.org/licenses/by/4.0/ -->
-  <link rel="icon" type="image/png" href="./assets/favicon.png">
-  
-</head>
-
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>my XY position controller</title>
+    <link rel="stylesheet" href="reset.css" />
+    <link rel="stylesheet" href="style.css" />
+    <script src="xyController.js" defer></script>
+    <script src="UIControl.js" defer></script>
+    <script src="tone.js" defer></script>
+  </head>
   <body>
-
-    <!-- Intro Modal popup -->
-    <!-- Websites are subject to an autoplay policy, so need user interaction before making sound -->
-    <!-- In this case we use the interaction of closing the modal to trigger loading the synth -->
-    <!-- https://developer.mozilla.org/en-US/docs/Web/Media/Guides/Autoplay -->    
-    <dialog id="introDialog">
-      <p>This synthesizer will make some noise, please check your system's volume setting.</p>
-      <button id="dialogCloseButton" autofocus>OK</button>
-    </dialog>
-
-<input type="range" id="frequencySlider" min="0" max="20000" />
-
-
-    <!-- Keyboard Controller -->
-    <div class="keyboardCont">
-      <div class="octaveCont">
-        <div class="whiteKeyCont">
-          <button class="whiteKey" data-note="c"></button>
-          <button class="whiteKey" data-note="d"></button>
-          <button class="whiteKey" data-note="e"></button>
-          <button class="whiteKey" data-note="f"></button>
-          <button class="whiteKey" data-note="g"></button>
-          <button class="whiteKey" data-note="a"></button>
-          <button class="whiteKey" data-note="b"></button>
-        </div>
-        <div class="blackKeyCont">
-          <div class="ghostKey"></div>
-          <button class="blackKey" data-note="c#"></button>
-          <button class="blackKey" data-note="d#"></button>
-          <div class="ghostKey"></div>
-          <div class="ghostKey"></div>
-          <button class="blackKey" data-note="f#"></button>
-          <button class="blackKey" data-note="g#"></button>
-          <button class="blackKey" data-note="a#"></button>
-          <div class="ghostKey"></div>
-        </div>
+    <div class="xyControlBox">
+      <svg
+        xmlns="http://www.w3.org/2000/svg"
+        viewBox="0 0 1920 1080"
+        preserveAspectRatio="xMidYMid meet"
+        class="xySVGEl"
+      >
+        <rect width="100%" height="100%" fill="transparent" id="xyPad" />
+        <circle r="3" fill="red" cx="500" cy="500" class="xyPosMarker" />
+      </svg>
+      <div id="controlBtn">
+        <button id="pauseBtn">
+          <img
+            id="pauseIcon"
+            src="./assets/icons8-pause-60.png"
+            alt="pauseButton"
+          />
+        </button>
+        <button id="resetBtn"></button>
       </div>
+      <input
+        type="range"
+        id="volumeSlider"
+        min="0"
+        max="1"
+        step="any"
+        value="0.5"
+      />
     </div>
-    <!-- delay feedback input -->
-      <input type="range" id="delayFeedbackInput" min="0" max="1" step="0.1"/>
 
-      <p id="volumeFeedback"></p>
+    <section>
+      <dialog id="infoDialog">
+        <p>click and drag your mouse, there will be sound.</p>
+        <p>there will be(but not yet) ripples after clicking and dragging</p>
+        <button id="infoDialogClose" autofocus>OK</button>
+      </dialog>
+    </section>
 
-
-    </div>
-
+    <p>
+      X Position: <span id="xPosOutput">500</span> Y Position:
+      <span id="yPosOutput">500</span>
+    </p>
   </body>
-
 </html>
