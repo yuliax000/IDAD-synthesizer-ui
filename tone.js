@@ -19,9 +19,11 @@ xyPad.addEventListener("mousedown", (e) => {
   dragging = true;
 
   xyPosMarker.setAttribute("fill", "rgba(134, 4, 4, 1)");
-
+  voice(e);
   // if (audioCtx.state === "suspended") audioCtx.resume();
+});
 
+function voice(e) {
   let osc = audioCtx.createOscillator();
   let filter = audioCtx.createBiquadFilter();
 
@@ -60,6 +62,7 @@ xyPad.addEventListener("mousedown", (e) => {
   //   randomFilterTypeSelect();
   let oscGain = audioCtx.createGain();
   oscGain.gain.setValueAtTime(0.5, audioCtx.currentTime);
+  oscGain.gain.exponentialRampToValueAtTime(0.001, audioCtx.currentTime + 5);
 
   osc
     .connect(filter)
@@ -70,6 +73,10 @@ xyPad.addEventListener("mousedown", (e) => {
   osc.start();
 
   activeOsillators.push({ osc, filter, oscGain });
+
+  setTimeout(() => {
+    activeOsillators = activeOsillators.filter((o) => o.osc !== osc);
+  }, 1000);
 
   activeOsillators.forEach(({ osc, filter }) => {
     osc.frequency.setValueAtTime(
@@ -84,8 +91,10 @@ xyPad.addEventListener("mousedown", (e) => {
 
     filter.Q.setValueAtTime((y / window.innerHeight) * 5, audioCtx.currentTime);
   });
+
+  // osc.stop(audioCtx.currentTime + 1);
   console.log("new osc", osc);
-});
+}
 
 // ---dragging change frequency and filter---
 function updateOsc(e) {
@@ -106,9 +115,30 @@ function updateOsc(e) {
     filter.Q.setValueAtTime((y / window.innerHeight) * 5, audioCtx.currentTime);
   });
 }
+
+// adding interval to dragging voice
+let lastTrigger = 0;
+function interval(e) {
+  let now = performance.now();
+  if (now - lastTrigger > 200) {
+    lastTrigger = now;
+    voice(e);
+    // draggingTone();
+  }
+}
+// adjusting dragging tone
+
+function draggingTone() {
+  activeOsillators.forEach(({ oscGain }) => {
+    oscGain.gain.cancelScheduledValues(audioCtx.currentTime);
+    oscGain.gain.exponentialRampToValueAtTime(0.001, audioCtx.currentTime + 5);
+  });
+}
+
 xyPad.addEventListener("mousemove", (e) => {
   if (dragging) {
-    updateOsc(e);
+    // updateOsc(e);
+    interval(e);
   }
 });
 
@@ -123,7 +153,7 @@ xyPad.addEventListener("mouseup", () => {
     osc.stop(audioCtx.currentTime + 5);
   });
 
-  activeOsillators = [];
+  // activeOsillators = [];
 });
 
 xyPad.addEventListener("mouseleave", () => {
