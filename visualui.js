@@ -5,16 +5,20 @@ svg.addEventListener("click", (e) => {
   const y = e.clientY;
 
   // create circle
-  const circle = document.createElementNS(
-    "http://www.w3.org/2000/svg",
-    "circle"
-  );
-  circle.setAttribute("cx", x);
-  circle.setAttribute("cy", y);
-  circle.setAttribute("r", 0);
-  circle.classList.add("ripple-circle");
+  for (let i = 0; i < 3; i = i + 1) {
+    const circle = document.createElementNS(
+      "http://www.w3.org/2000/svg",
+      "circle"
+    );
+    circle.setAttribute("cx", x);
+    circle.setAttribute("cy", y);
+    circle.setAttribute("r", 0);
+    circle.classList.add("ripple-circle");
 
-  svg.appendChild(circle);
+    circle.style.animationDelay = `${i * 0.3}s`;
+
+    svg.appendChild(circle);
+  }
 
   // delete after animation finished
 
