@@ -1,9 +1,17 @@
 const svg = document.querySelector(".xySVGEl");
 
-svg.addEventListener("click", (e) => {
+let isDrawing = false;
+let rippleInterval;
+
+svg.addEventListener("mousedown", (e) => {
+  isDrawing = true;
+
   const x = e.clientX;
   const y = e.clientY;
+  generateRipple(x, y);
+});
 
+function generateRipple(x, y) {
   // create circle
   for (let i = 0; i < 3; i = i + 1) {
     const circle = document.createElementNS(
@@ -25,4 +33,15 @@ svg.addEventListener("click", (e) => {
   circle.addEventListener("animationend", () => {
     circle.remove();
   });
+}
+
+svg.addEventListener("mousedown", (e) => {
+  isDrawing = true;
+
+  const x = e.clientX;
+  const y = e.clientY;
+
+  if (isDrawing) {
+    generateRipple(x, y);
+  }
 });
