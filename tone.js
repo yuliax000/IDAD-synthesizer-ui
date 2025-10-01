@@ -17,8 +17,9 @@ xyPad.addEventListener("mousedown", (e) => {
   console.log("click on", e.target);
   if (dragging) return;
   dragging = true;
+  // console.log(dragging);
 
-  xyPosMarker.setAttribute("fill", "rgba(134, 4, 4, 1)");
+  xyPosMarker.setAttribute("fill", "#577277");
   voice(e);
   // if (audioCtx.state === "suspended") audioCtx.resume();
 });
@@ -136,6 +137,7 @@ function draggingTone() {
 }
 
 xyPad.addEventListener("mousemove", (e) => {
+  console.log(dragging);
   if (dragging) {
     // updateOsc(e);
     interval(e);
@@ -146,7 +148,7 @@ xyPad.addEventListener("mouseup", () => {
   if (!dragging) return;
   dragging = false;
 
-  xyPosMarker.setAttribute("fill", "red");
+  xyPosMarker.setAttribute("fill", "#577277");
 
   activeOsillators.forEach(({ osc, oscGain }) => {
     oscGain.gain.exponentialRampToValueAtTime(0.001, audioCtx.currentTime + 5);

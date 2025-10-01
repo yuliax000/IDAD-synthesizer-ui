@@ -22,6 +22,7 @@ pauseBtn.addEventListener("click", (e) => {
   if (audioCtx.state === "running") {
     audioCtx.suspend();
     pauseIcon.src = "./assets/icons8-play-60.png";
+    Animation.pause();
     console.log("paused");
   } else if (audioCtx.state === "suspended") {
     audioCtx.resume();

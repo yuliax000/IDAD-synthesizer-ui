@@ -26,22 +26,13 @@ function generateRipple(x, y) {
     circle.style.animationDelay = `${i * 0.3}s`;
 
     svg.appendChild(circle);
+
+    circle.addEventListener("animationend", () => {
+      circle.remove();
+    });
   }
 
   // delete after animation finished
-
-  circle.addEventListener("animationend", () => {
-    circle.remove();
-  });
 }
 
-svg.addEventListener("mousedown", (e) => {
-  isDrawing = true;
-
-  const x = e.clientX;
-  const y = e.clientY;
-
-  if (isDrawing) {
-    generateRipple(x, y);
-  }
-});
+function resetAnimation() {}

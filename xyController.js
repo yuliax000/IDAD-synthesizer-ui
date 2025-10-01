@@ -56,10 +56,10 @@ xyControllers.forEach((xyBox) => {
   xyBox.addEventListener("mousedown", xyDragging);
 });
 function newXValue(value) {
-  xOutputText.textContent = value;
+  // xOutputText.textContent = value;
 }
 function newYValue(value) {
-  yOutputText.textContent = value;
+  // yOutputText.textContent = value;
 }
 
 function clamp(value, min, max) {

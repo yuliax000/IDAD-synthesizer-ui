@@ -1,9 +1,23 @@
+:root {
+  --col-01: #253a5e;
+  --col-02: #4f8fba;
+  --col-03: #c7cfcc;
+  --col-04: #3c5e8b;
+  --col-05: #172038;
+  --col-06: #577277;
+}
+
 .xyControlBox {
   position: relative;
   width: 100vw;
   height: 100vh;
-  background-color: black;
+  background-color: var(--col-04);
   overflow: hidden;
+  cursor: pointer;
+}
+
+footer {
+  background-color: var(--col-04);
 }
 
 .xySVGEl {
@@ -34,7 +48,7 @@ input[type="range"]:focus {
   outline: none;
 }
 input[type="range"]::-webkit-slider-runnable-track {
-  background: #7780b2;
+  background: var(--col-05);
   border: 0.2px solid #000001;
   border-radius: 23.4px;
   width: 100%;
@@ -52,10 +66,10 @@ input[type="range"]::-webkit-slider-thumb {
   -webkit-appearance: none;
 }
 input[type="range"]:focus::-webkit-slider-runnable-track {
-  background: #7780b2;
+  background: var(--col-05);
 }
 input[type="range"]::-moz-range-track {
-  background: #7780b2;
+  background: var(--col-05);
   border: 0.2px solid #000001;
   border-radius: 23.4px;
   width: 100%;
@@ -80,12 +94,12 @@ input[type="range"]::-ms-track {
   cursor: pointer;
 }
 input[type="range"]::-ms-fill-lower {
-  background: #59639d;
+  background: var(--col-05);
   border: 0.2px solid #000001;
   border-radius: 46.8px;
 }
 input[type="range"]::-ms-fill-upper {
-  background: #7780b2;
+  background: var(--col-05);
   border: 0.2px solid #000001;
   border-radius: 46.8px;
 }
@@ -100,10 +114,10 @@ input[type="range"]::-ms-thumb {
   /*Needed to keep the Edge thumb centred*/
 }
 input[type="range"]:focus::-ms-fill-lower {
-  background: #7780b2;
+  background: var(--col-05);
 }
 input[type="range"]:focus::-ms-fill-upper {
-  background: #7780b2;
+  background: var(--col-05);
 }
 /*TODO: Use one of the selectors from https://stackoverflow.com/a/20541859/7077589 and figure out
 how to remove the virtical space around the range input in IE*/
@@ -131,25 +145,44 @@ how to remove the virtical space around the range input in IE*/
 
 .xyPosMarker {
   pointer-events: none;
+  color: var(--col-03);
 }
 
 #pauseBtn {
   width: 30px;
   height: 30px;
-  background-color: #010101;
+  background-color: var(--col-04);
   background-size: contain;
   border: none;
   cursor: pointer;
+}
+
+#pauseBtn:hover {
+  background-color: var(--col-02);
+  cursor: pointer;
+}
+
+#pauseBtn:active {
+  background-color: var(--col-01);
 }
 
 #resetBtn {
   width: 30px;
   height: 30px;
   background: url("assets/icons8-reset-64.png") no-repeat center center;
-  background-color: #010101;
+  background-color: var(--col-04);
   background-size: contain;
   border: none;
   cursor: pointer;
+}
+
+#resetBtn:hover {
+  background-color: var(--col-02);
+  cursor: pointer;
+}
+
+#resetBtn:active {
+  background-color: var(--col-01);
 }
 
 :root {
@@ -171,20 +204,21 @@ dialog[open] {
 }
 
 dialog::backdrop {
-  background-color: rgb(0, 0, 0);
+  background-color: var(--col-04);
 }
 
 #infoDialogClose {
   padding: 0 1rem;
 }
 
-button:hover {
+/* button:hover {
   cursor: pointer;
+  background-color: var(--col-02);
 }
 
 button:active {
-  filter: invert();
-}
+  background-color: var(--col-01);
+} */
 
 @keyframes ripple {
   0% {
