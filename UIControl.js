@@ -22,13 +22,28 @@ pauseBtn.addEventListener("click", (e) => {
   if (audioCtx.state === "running") {
     audioCtx.suspend();
     pauseIcon.src = "./assets/icons8-play-60.png";
-    Animation.pause();
-    console.log("paused");
+
+    isPaused = true;
+    // console.log("paused");
   } else if (audioCtx.state === "suspended") {
     audioCtx.resume();
     pauseIcon.src = "./assets/icons8-pause-60.png";
-    console.log("Resumed");
+
+    isPaused = false;
+    // console.log("Resumed");
   }
+
+  // isPaused = !isPaused;
+
+  const ripples = svg.querySelectorAll(".ripple-circle");
+
+  ripples.forEach((circle) => {
+    if (isPaused) {
+      circle.classList.add("paused");
+    } else {
+      circle.classList.remove("paused");
+    }
+  });
 });
 
 let resetBtn = document.getElementById("resetBtn");

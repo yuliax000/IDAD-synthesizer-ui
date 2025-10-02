@@ -25,16 +25,17 @@ xyControllers.forEach((xyBox) => {
     markerYPos = 500;
   let dragging = false;
 
-  function startxyDrag() {
+  function startxyDrag(e) {
     document.body.classList.add("drag-active");
     document.addEventListener("mousemove", xyDragging);
     document.addEventListener("mouseup", endXYDrag);
+    xyDragging(e);
   }
   function xyDragging(e) {
     if (!dragging) {
       window.requestAnimationFrame(() => {
-        markerXPos = clamp(e.clientX, 0, window.innerWidth);
-        markerYPos = clamp(e.clientY, 0, window.innerHeight);
+        markerXPos = clamp(e.clientX - xyPad.left, 0, window.innerWidth);
+        markerYPos = clamp(e.clientY - xyPad.top, 0, window.innerHeight);
         xyPosMarker.setAttribute("cx", markerXPos);
         xyPosMarker.setAttribute("cy", markerYPos);
 
@@ -53,7 +54,7 @@ xyControllers.forEach((xyBox) => {
   }
 
   xyBox.addEventListener("mousedown", startxyDrag);
-  xyBox.addEventListener("mousedown", xyDragging);
+  // xyBox.addEventListener("mousedown", xyDragging);
 });
 function newXValue(value) {
   // xOutputText.textContent = value;

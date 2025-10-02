@@ -14,13 +14,24 @@ let activeOsillators = [];
 const oscType = ["sine", "square", "triangle", "sawtooth"];
 
 xyPad.addEventListener("mousedown", (e) => {
-  console.log("click on", e.target);
+  // console.log("click on", e.target);
+  if (isPaused) return;
+
   if (dragging) return;
   dragging = true;
   // console.log(dragging);
 
   xyPosMarker.setAttribute("fill", "#577277");
   voice(e);
+  let throttled = false;
+
+  if (!throttled) {
+    voice(e);
+    throttled = true;
+    setTimeout(function () {
+      throttled = false;
+    }, delay);
+  }
   // if (audioCtx.state === "suspended") audioCtx.resume();
 });
 
@@ -135,12 +146,22 @@ function draggingTone() {
     oscGain.gain.exponentialRampToValueAtTime(0.001, audioCtx.currentTime + 5);
   });
 }
+const delay = 300;
+let throttled = false;
 
 xyPad.addEventListener("mousemove", (e) => {
   console.log(dragging);
-  if (dragging) {
-    // updateOsc(e);
-    interval(e);
+  // if (dragging) {
+  //   // updateOsc(e);
+  //   interval(e);
+  // }
+  if (!dragging) return;
+  if (!throttled) {
+    voice(e);
+    throttled = true;
+    setTimeout(function () {
+      throttled = false;
+    }, delay);
   }
 });
 
