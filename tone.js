@@ -17,7 +17,7 @@ xyPad.addEventListener("mousedown", (e) => {
   // console.log("click on", e.target);
   if (isPaused) return;
 
-  if (dragging) return;
+  // if (dragging) return;
   dragging = true;
   // console.log(dragging);
 

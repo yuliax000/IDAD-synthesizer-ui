@@ -24,30 +24,41 @@ xyControllers.forEach((xyBox) => {
   let markerXPos = 500,
     markerYPos = 500;
   let dragging = false;
+  let framelock = false;
 
   function startxyDrag(e) {
+    dragging = true;
     document.body.classList.add("drag-active");
     document.addEventListener("mousemove", xyDragging);
     document.addEventListener("mouseup", endXYDrag);
     xyDragging(e);
   }
   function xyDragging(e) {
-    if (!dragging) {
-      window.requestAnimationFrame(() => {
-        markerXPos = clamp(e.clientX - xyPad.left, 0, window.innerWidth);
-        markerYPos = clamp(e.clientY - xyPad.top, 0, window.innerHeight);
-        xyPosMarker.setAttribute("cx", markerXPos);
-        xyPosMarker.setAttribute("cy", markerYPos);
+    // adding framelock to prevent too much mousemove;
+    if (!dragging) return;
+    if (framelock) return;
+    framelock = true;
 
-        newXValue(markerXPos);
-        newYValue(markerYPos);
-        dragging = false;
-      });
-      dragging = true;
-    }
+    const x = e.clientX;
+    const y = e.clientY;
+
+    window.requestAnimationFrame(() => {
+      markerXPos = clamp(x, 0, window.innerWidth);
+      markerYPos = clamp(y, 0, window.innerHeight);
+      xyPosMarker.setAttribute("cx", markerXPos);
+      xyPosMarker.setAttribute("cy", markerYPos);
+
+      newXValue(markerXPos);
+      newYValue(markerYPos);
+      framelock = false;
+      // dragging = false;
+      // });
+      // dragging = true;
+    });
   }
 
   function endXYDrag() {
+    dragging = false;
     document.body.classList.remove("drag-active");
     document.removeEventListener("mousemove", xyDragging);
     document.removeEventListener("mouseup", endXYDrag);
