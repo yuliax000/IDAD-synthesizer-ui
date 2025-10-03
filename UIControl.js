@@ -1,6 +1,6 @@
 const xyPad = document.getElementById("xyPad");
 
-let dragging = false;
+// let dragging = false;
 
 const volumeSlider = document.getElementById("volumeSlider");
 volumeSlider.addEventListener("input", (e) => {

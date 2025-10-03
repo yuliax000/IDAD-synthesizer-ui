@@ -1,5 +1,6 @@
 let audioCtx = new AudioContext();
 let xyPosMarker = document.getElementsByClassName("xyPosMarker")[0];
+let lastTrigger = 0;
 
 // -----this part use oscillator to generate voice-----
 
@@ -13,26 +14,39 @@ let activeOsillators = [];
 
 const oscType = ["sine", "square", "triangle", "sawtooth"];
 
+// I combine two mousedown logic (xycontroller and tone controller) together to avoid conflict
+let framelock = false;
+
+let markerXPos = 500,
+  markerYPos = 500;
+let dragging = false;
+
 xyPad.addEventListener("mousedown", (e) => {
   // console.log("click on", e.target);
   if (isPaused) return;
+  console.log(isPaused);
 
-  // if (dragging) return;
+  if (dragging) return;
   dragging = true;
+  lastTrigger = 0;
   // console.log(dragging);
+  document.body.classList.add("drag-active");
+  // xyDragging(e);
 
   xyPosMarker.setAttribute("fill", "#577277");
   voice(e);
-  let throttled = false;
+  // interval(e);
+  xyDragging(e);
+  // let throttled = false;
 
-  if (!throttled) {
-    voice(e);
-    throttled = true;
-    setTimeout(function () {
-      throttled = false;
-    }, delay);
-  }
-  // if (audioCtx.state === "suspended") audioCtx.resume();
+  // if (!throttled) {
+  //   voice(e);
+  //   throttled = true;
+  //   setTimeout(function () {
+  //     throttled = false;
+  //   }, delay);
+  // }
+  if (audioCtx.state === "suspended") audioCtx.resume();
 });
 
 function voice(e) {
@@ -41,6 +55,8 @@ function voice(e) {
 
   const x = e.clientX;
   const y = e.clientY;
+  const maxOsc = 12;
+  if (activeOsillators.length >= maxOsc) return;
 
   function oscTypeSelect() {
     let randomNumber = Math.random();
@@ -104,6 +120,10 @@ function voice(e) {
     filter.Q.setValueAtTime((y / window.innerHeight) * 5, audioCtx.currentTime);
   });
 
+  setTimeout(() => {
+    activeOsillators = activeOsillators.filter((o) => o.osc !== osc);
+  }, 1000);
+
   // osc.stop(audioCtx.currentTime + 1);
   console.log("new osc", osc);
 }
@@ -129,15 +149,15 @@ function updateOsc(e) {
 }
 
 // adding interval to dragging voice
-let lastTrigger = 0;
-function interval(e) {
-  let now = performance.now();
-  if (now - lastTrigger > 200) {
-    lastTrigger = now;
-    voice(e);
-    // draggingTone();
-  }
-}
+// let lastTrigger = 0;
+// function interval(e) {
+// let now = performance.now();
+// if (now - lastTrigger > 200) {
+//   lastTrigger = now;
+//   voice(e);
+//   // draggingTone();
+// }
+// }
 // adjusting dragging tone
 
 function draggingTone() {
@@ -145,37 +165,55 @@ function draggingTone() {
     oscGain.gain.cancelScheduledValues(audioCtx.currentTime);
     oscGain.gain.exponentialRampToValueAtTime(0.001, audioCtx.currentTime + 5);
   });
+  // osc.stop(audioCtx.currentTime + 5);
 }
 const delay = 300;
-let throttled = false;
+// let throttled = false;
 
-xyPad.addEventListener("mousemove", (e) => {
-  console.log(dragging);
+document.addEventListener("mousemove", (e) => {
+  if (audioCtx.state === "suspended") audioCtx.resume();
+  console.log("mousemove", dragging);
   // if (dragging) {
   //   // updateOsc(e);
-  //   interval(e);
-  // }
   if (!dragging) return;
-  if (!throttled) {
+
+  xyDragging(e);
+
+  let now = performance.now();
+  if (now - lastTrigger > 200) {
+    lastTrigger = now;
+    console.log("voice triggered");
     voice(e);
-    throttled = true;
-    setTimeout(function () {
-      throttled = false;
-    }, delay);
+
+    // draggingTone();
   }
+  // console.log("mousemove", dragging);
+
+  // }
+
+  // if (!throttled) {
+  //   voice(e);
+  //   throttled = true;
+  //   setTimeout(function () {
+  //     throttled = false;
+  //   }, delay);
+  // }
+  console.log(audioCtx.state, isPaused);
 });
 
-xyPad.addEventListener("mouseup", () => {
+document.addEventListener("mouseup", () => {
   if (!dragging) return;
   dragging = false;
 
+  document.body.classList.remove("drag-active");
+
   xyPosMarker.setAttribute("fill", "#577277");
 
-  activeOsillators.forEach(({ osc, oscGain }) => {
-    oscGain.gain.exponentialRampToValueAtTime(0.001, audioCtx.currentTime + 5);
-    osc.stop(audioCtx.currentTime + 5);
-  });
-
+  // activeOsillators.forEach(({ osc, oscGain }) => {
+  //   oscGain.gain.exponentialRampToValueAtTime(0.001, audioCtx.currentTime + 5);
+  //   osc.stop(audioCtx.currentTime + 5);
+  // });
+  draggingTone();
   // activeOsillators = [];
 });
 
@@ -186,3 +224,24 @@ xyPad.addEventListener("mouseleave", () => {
 });
 
 console.log(audioCtx.state);
+
+function xyDragging(e) {
+  // adding framelock to prevent too much mousemove;
+  // if (dragging) return;
+  if (framelock) return;
+  framelock = true;
+
+  const x = e.clientX;
+  const y = e.clientY;
+
+  window.requestAnimationFrame(() => {
+    markerXPos = clamp(x, 0, window.innerWidth);
+    markerYPos = clamp(y, 0, window.innerHeight);
+    xyPosMarker.setAttribute("cx", markerXPos);
+    xyPosMarker.setAttribute("cy", markerYPos);
+
+    newXValue(markerXPos);
+    newYValue(markerYPos);
+    framelock = false;
+  });
+}
