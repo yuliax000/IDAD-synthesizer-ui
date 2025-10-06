@@ -3,7 +3,7 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>my XY position controller</title>
+    <title>draw a ripple</title>
     <link rel="stylesheet" href="reset.css" />
     <link rel="stylesheet" href="style.css" />
     <script src="xyController.js" defer></script>
@@ -13,6 +13,11 @@
   </head>
   <body>
     <div class="xyControlBox">
+      <img
+        src="assets/Texturelabs_Glass_120L.jpg"
+        alt="textureLayer"
+        class="glassTexture"
+      />
       <svg
         xmlns="http://www.w3.org/2000/svg"
         viewBox="0 0 1920 1080"
@@ -22,6 +27,7 @@
         <rect width="100%" height="100%" fill="transparent" id="xyPad" />
         <circle r="1" fill="#c7cfcc" cx="500" cy="500" class="xyPosMarker" />
       </svg>
+
       <!-- <canvas id="rippleCanvas"></canvas> -->
       <div id="controlBtn">
         <button id="pauseBtn">
@@ -45,8 +51,12 @@
 
     <section>
       <dialog id="infoDialog">
-        <p>click and drag your mouse, there will be sound.</p>
-        <p>there will be(but not yet) ripples after clicking and dragging</p>
+        <div id="dialogPng">
+          <img src="assets/icons8-click-100.png" alt="click" id="clickPng" />
+          <img src="assets/icons8-hand-drag-100.png" alt="drag" id="dragPng" />
+        </div>
+
+        <p>this website will make some noise.</p>
         <button id="infoDialogClose" autofocus>OK</button>
       </dialog>
     </section>
@@ -56,17 +66,10 @@
       <span id="yPosOutput">500</span>
     </p> -->
     <footer>
-      <a target="_blank" href="https://icons8.com/icon/q0nxNdfpbYVl/pause"
-        >Pause</a
-      >
-      icon by
+      icons by
       <a target="_blank" href="https://icons8.com">Icons8</a>
-      <a target="_blank" href="https://icons8.com/icon/59862/play">Play</a>
-      icon by <a target="_blank" href="https://icons8.com">Icons8</a>
-      <a target="_blank" href="https://icons8.com/icon/eYceOAlmU2md/reset"
-        >Reset</a
-      >
-      icon by <a target="_blank" href="https://icons8.com">Icons8</a>
+      textures by
+      <a target="_blank" href="https://texturelabs.org/">texturelabs</a>
     </footer>
   </body>
 </html>

@@ -170,7 +170,7 @@ function draggingTone() {
 const delay = 300;
 // let throttled = false;
 
-document.addEventListener("mousemove", (e) => {
+xyPad.addEventListener("mousemove", (e) => {
   if (audioCtx.state === "suspended") audioCtx.resume();
   console.log("mousemove", dragging);
   // if (dragging) {
@@ -201,7 +201,7 @@ document.addEventListener("mousemove", (e) => {
   console.log(audioCtx.state, isPaused);
 });
 
-document.addEventListener("mouseup", () => {
+xyPad.addEventListener("mouseup", () => {
   if (!dragging) return;
   dragging = false;
 

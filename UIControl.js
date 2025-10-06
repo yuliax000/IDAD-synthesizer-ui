@@ -1,7 +1,5 @@
 const xyPad = document.getElementById("xyPad");
 
-// let dragging = false;
-
 const volumeSlider = document.getElementById("volumeSlider");
 volumeSlider.addEventListener("input", (e) => {
   gainNode.gain.setValueAtTime(e.target.value, audioCtx.currentTime);
@@ -49,6 +47,7 @@ pauseBtn.addEventListener("click", (e) => {
 let resetBtn = document.getElementById("resetBtn");
 resetBtn.addEventListener("click", (e) => {
   e.stopPropagation();
+  clearRipples();
   // close old one
   if (audioCtx && audioCtx.state !== "closed") {
     audioCtx.close();
@@ -62,3 +61,7 @@ resetBtn.addEventListener("click", (e) => {
 
   console.log("audio reset", audioCtx.state);
 });
+
+// function stopRipple() {
+//   svg.innerHTML = ``;
+// }

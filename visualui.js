@@ -3,7 +3,7 @@ const svg = document.querySelector(".xySVGEl");
 let isDrawing = false;
 let rippleInterval;
 const rippleDelay = 100;
-// let rippleThrottled = false;
+let rippleThrottled = false;
 let isPaused = false;
 
 xyPad.addEventListener("mousedown", (e) => {
@@ -52,4 +52,22 @@ function generateRipple(x, y) {
   }
 }
 
-function resetAnimation() {}
+xyPad.addEventListener("mousemove", (e) => {
+  if (!dragging) return;
+  if (!rippleThrottled) {
+    const x = e.clientX;
+    const y = e.clientY;
+    generateRipple(x, y);
+
+    rippleThrottled = true;
+    setTimeout(function () {
+      rippleThrottled = false;
+    }, rippleDelay);
+  }
+});
+
+function clearRipples() {
+  svg.querySelectorAll(".ripple-circle").forEach(function (circle) {
+    circle.remove();
+  });
+}
