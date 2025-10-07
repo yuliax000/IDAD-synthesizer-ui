@@ -24,6 +24,7 @@ footer {
   bottom: 0;
   left: 0;
   width: auto;
+  color: white;
 }
 
 .xySVGEl {
@@ -57,7 +58,7 @@ input[type="range"]:focus {
 }
 input[type="range"]::-webkit-slider-runnable-track {
   background: var(--col-05);
-  border: 0.2px solid #000001;
+  border: 0.2px solid #222222;
   border-radius: 23.4px;
   width: 100%;
   height: 5.2px;
@@ -67,8 +68,8 @@ input[type="range"]::-webkit-slider-thumb {
   margin-top: -12.6px;
   width: 16px;
   height: 30px;
-  background: #ffffff;
-  border: 1px solid rgba(0, 0, 0, 0.1);
+  background: #dbdbdb;
+  border: 1px solid rgba(59, 59, 59, 0.1);
   border-radius: 3px;
   cursor: pointer;
   -webkit-appearance: none;
@@ -78,7 +79,7 @@ input[type="range"]:focus::-webkit-slider-runnable-track {
 }
 input[type="range"]::-moz-range-track {
   background: var(--col-05);
-  border: 0.2px solid #000001;
+  border: 0.2px solid #292929;
   border-radius: 23.4px;
   width: 100%;
   height: 5.2px;
@@ -87,8 +88,8 @@ input[type="range"]::-moz-range-track {
 input[type="range"]::-moz-range-thumb {
   width: 16px;
   height: 30px;
-  background: #ffffff;
-  border: 1px solid rgba(0, 0, 0, 0.1);
+  background: #cecece;
+  border: 1px solid rgba(48, 48, 48, 0.1);
   border-radius: 3px;
   cursor: pointer;
 }
@@ -103,7 +104,7 @@ input[type="range"]::-ms-track {
 }
 input[type="range"]::-ms-fill-lower {
   background: var(--col-05);
-  border: 0.2px solid #000001;
+  border: 0.2px solid #232323;
   border-radius: 46.8px;
 }
 input[type="range"]::-ms-fill-upper {
@@ -114,7 +115,7 @@ input[type="range"]::-ms-fill-upper {
 input[type="range"]::-ms-thumb {
   width: 16px;
   height: 30px;
-  background: #ffffff;
+  background: #dddddd;
   border: 1px solid rgba(0, 0, 0, 0.1);
   border-radius: 3px;
   cursor: pointer;
@@ -218,6 +219,10 @@ dialog::backdrop {
 #infoDialogClose {
   padding: 0 1rem;
   background-color: transparent;
+  color: white;
+  border: var(--border);
+  stroke: white;
+  outline: none;
 }
 
 button:hover {
@@ -282,3 +287,120 @@ button:active {
 }
 
 /* responsive setting */
+
+@media (prefers-color-scheme: dark) {
+  /* #pauseBtn img {
+    filter: invert(1) brightness(1.6);
+  }
+  #resetBtn {
+    filter: invert(1) brightness(1.6);
+  }
+
+  input[type="range"]::-webkit-slider-runnable-track {
+    background: var(--col-03);
+    border: 0.2px solid #cccccc;
+    border-radius: 23.4px;
+    width: 100%;
+    height: 5.2px;
+    cursor: pointer;
+  }
+  input[type="range"]::-webkit-slider-thumb {
+    margin-top: -12.6px;
+    width: 16px;
+    height: 30px;
+    background: black;
+    border: 1px solid rgba(221, 221, 221, 0.1);
+    border-radius: 3px;
+    cursor: pointer;
+    -webkit-appearance: none;
+  }
+  input[type="range"]:focus::-webkit-slider-runnable-track {
+    background: var(--col-02);
+  }
+  input[type="range"]::-moz-range-track {
+    background: var(--col-02);
+    border: 0.2px solid #eaeaea;
+    border-radius: 23.4px;
+    width: 100%;
+    height: 5.2px;
+    cursor: pointer;
+  }
+  input[type="range"]::-moz-range-thumb {
+    width: 16px;
+    height: 30px;
+    background: black;
+    border: 1px solid rgba(236, 236, 236, 0.1);
+    border-radius: 3px;
+    cursor: pointer;
+  }
+  input[type="range"]::-ms-track {
+    background: transparent;
+    border-color: transparent;
+    border-width: 13.4px 0;
+    color: transparent;
+    width: 100%;
+    height: 5.2px;
+    cursor: pointer;
+  }
+  input[type="range"]::-ms-fill-lower {
+    background: var(--col-05);
+    border: 0.2px solid #dedede;
+    border-radius: 46.8px;
+  }
+  input[type="range"]::-ms-fill-upper {
+    background: var(--col-03);
+    border: 0.2px solid #d3d3d3;
+    border-radius: 46.8px;
+  }
+  input[type="range"]::-ms-thumb {
+    width: 16px;
+    height: 30px;
+    background: black;
+    border: 1px solid rgba(224, 224, 224, 0.1);
+    border-radius: 3px;
+    cursor: pointer;
+    margin-top: 0px;
+  }
+  input[type="range"]:focus::-ms-fill-lower {
+    background: var(--col-06);
+  }
+  input[type="range"]:focus::-ms-fill-upper {
+    background: var(--col-06);
+  } */
+
+  .xyControlBox {
+    background-color: var(--col-01);
+  }
+
+  /* .ripple-circle {
+    stroke: var(--col-03);
+  } */
+}
+
+dialog {
+  border: none;
+}
+
+@media (width>=768px) {
+  p {
+    font-size: 1.5rem;
+  }
+}
+
+@media (width <=375px) {
+  p {
+    font-size: 0.8rem;
+  }
+}
+
+@media (width >=1440px) {
+  p {
+    font-size: 2rem;
+  }
+}
+
+@media (width >=2560px) {
+  p {
+    font-size: 3rem;
+  }
+}
