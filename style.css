@@ -14,6 +14,8 @@
   background-color: var(--col-04);
   overflow: hidden;
   cursor: pointer;
+  touch-action: none;
+  -ms-touch-action: none;
 }
 
 footer {
@@ -194,7 +196,7 @@ how to remove the virtical space around the range input in IE*/
 :root {
   --col01: rgb(76, 76, 76);
   --col02: rgb(255, 255, 255);
-  --border: solid 0.3rem var(--col02);
+  --border: solid 0.2rem var(--col02);
 }
 
 dialog[open] {
@@ -215,17 +217,17 @@ dialog::backdrop {
 
 #infoDialogClose {
   padding: 0 1rem;
+  background-color: transparent;
 }
 
-/* button:hover {
+button:hover {
   cursor: pointer;
-  background-color: var(--col-02);
+  background-color: var(--col-04);
 }
 
 button:active {
   background-color: var(--col-01);
-} */
-
+}
 @keyframes ripple {
   0% {
     r: 0;
@@ -262,7 +264,21 @@ button:active {
 #dialogPng {
   display: flex;
   flex-direction: row;
-  justify-content: space-between;
+  justify-content: space-around;
   align-items: center;
-  gap: 40px;
+  gap: 3rem;
+  width: auto;
+  height: auto;
 }
+
+#clickPng {
+  width: 4rem;
+  height: 4rem;
+}
+
+#dragPng {
+  width: 4rem;
+  height: 4rem;
+}
+
+/* responsive setting */

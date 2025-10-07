@@ -6,13 +6,14 @@ const rippleDelay = 100;
 let rippleThrottled = false;
 let isPaused = false;
 
-xyPad.addEventListener("mousedown", (e) => {
+xyPad.addEventListener("pointerdown", (e) => {
   if (isPaused) return;
   isDrawing = true;
 
   // if (!rippleThrottled) {
-  const x = e.clientX;
-  const y = e.clientY;
+  const rect = xyPad.getBoundingClientRect();
+  const x = e.clientX - rect.left;
+  const y = e.clientY - rect.top;
   generateRipple(x, y);
 
   //   rippleThrottled = true;
@@ -52,11 +53,12 @@ function generateRipple(x, y) {
   }
 }
 
-xyPad.addEventListener("mousemove", (e) => {
+xyPad.addEventListener("pointermove", (e) => {
   if (!dragging) return;
   if (!rippleThrottled) {
-    const x = e.clientX;
-    const y = e.clientY;
+    const rect = xyPad.getBoundingClientRect();
+    const x = e.clientX - rect.left;
+    const y = e.clientY - rect.top;
     generateRipple(x, y);
 
     rippleThrottled = true;

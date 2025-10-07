@@ -20,8 +20,8 @@ let framelock = false;
 let markerXPos = 500,
   markerYPos = 500;
 let dragging = false;
-
-xyPad.addEventListener("mousedown", (e) => {
+// change mousedown => pointerdown, to suit mobile device;
+xyPad.addEventListener("pointerdown", (e) => {
   // console.log("click on", e.target);
   if (isPaused) return;
   console.log(isPaused);
@@ -53,8 +53,9 @@ function voice(e) {
   let osc = audioCtx.createOscillator();
   let filter = audioCtx.createBiquadFilter();
 
-  const x = e.clientX;
-  const y = e.clientY;
+  const rect = xyPad.getBoundingClientRect();
+  const x = e.clientX - rect.left;
+  const y = e.clientY - rect.top;
   const maxOsc = 12;
   if (activeOsillators.length >= maxOsc) return;
 
@@ -130,8 +131,9 @@ function voice(e) {
 
 // ---dragging change frequency and filter---
 function updateOsc(e) {
-  const x = e.clientX;
-  const y = e.clientY;
+  const rect = xyPad.getBoundingClientRect();
+  const x = e.clientX - rect.left;
+  const y = e.clientY - rect.top;
 
   activeOsillators.forEach(({ osc, filter }) => {
     osc.frequency.setValueAtTime(
@@ -170,9 +172,9 @@ function draggingTone() {
 const delay = 300;
 // let throttled = false;
 
-xyPad.addEventListener("mousemove", (e) => {
+xyPad.addEventListener("pointermove", (e) => {
   if (audioCtx.state === "suspended") audioCtx.resume();
-  console.log("mousemove", dragging);
+  console.log("pointermove", dragging);
   // if (dragging) {
   //   // updateOsc(e);
   if (!dragging) return;
@@ -201,7 +203,7 @@ xyPad.addEventListener("mousemove", (e) => {
   console.log(audioCtx.state, isPaused);
 });
 
-xyPad.addEventListener("mouseup", () => {
+xyPad.addEventListener("pointerup", () => {
   if (!dragging) return;
   dragging = false;
 
@@ -217,9 +219,9 @@ xyPad.addEventListener("mouseup", () => {
   // activeOsillators = [];
 });
 
-xyPad.addEventListener("mouseleave", () => {
+xyPad.addEventListener("pointerleave", () => {
   if (dragging) {
-    xyPad.dispatchEvent(new Event("mouseup"));
+    xyPad.dispatchEvent(new Event("pointerup"));
   }
 });
 
@@ -231,8 +233,9 @@ function xyDragging(e) {
   if (framelock) return;
   framelock = true;
 
-  const x = e.clientX;
-  const y = e.clientY;
+  const rect = xyPad.getBoundingClientRect();
+  const x = e.clientX - rect.left;
+  const y = e.clientY - rect.top;
 
   window.requestAnimationFrame(() => {
     markerXPos = clamp(x, 0, window.innerWidth);
