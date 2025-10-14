@@ -267,7 +267,7 @@ button:active {
 
 .ripple-circle {
   fill: none;
-  /* stroke: white; */
+  stroke: white;
   stroke-width: 8;
   animation: ripple 1s linear forwards;
 }
