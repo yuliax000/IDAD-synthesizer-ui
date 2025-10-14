@@ -139,13 +139,34 @@ how to remove the virtical space around the range input in IE*/
 }
 
 #volumeSlider {
-  position: absolute;
+  /* position: absolute;
   right: 20px;
-  top: 10px;
+  top: 10px; */
   writing-mode: bt-lr;
   width: 200px;
   height: 20px;
   z-index: 10;
+}
+
+#audioControl {
+  position: absolute;
+  right: 20px;
+  top: 10px;
+  display: flex;
+  align-items: center;
+  flex-direction: row;
+  gap: 10px;
+  z-index: 10;
+}
+
+#noAudio {
+  width: 25px;
+  height: 25px;
+}
+
+#audioOn {
+  width: 25px;
+  height: 25px;
 }
 
 #xyPad {
@@ -246,7 +267,7 @@ button:active {
 
 .ripple-circle {
   fill: none;
-  stroke: white;
+  /* stroke: white; */
   stroke-width: 8;
   animation: ripple 1s linear forwards;
 }
@@ -287,6 +308,8 @@ button:active {
 }
 
 /* responsive setting */
+/* tried to setting lot of change in dark modes, but it works unwell */
+/* therefore, I just change the background color into a deeper color */
 
 @media (prefers-color-scheme: dark) {
   /* #pauseBtn img {

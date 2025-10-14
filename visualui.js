@@ -44,6 +44,23 @@ function generateRipple(x, y) {
 
     svg.appendChild(circle);
 
+    // adding random color setting
+    // but I don't like the effets it create, which makes the ripple look not that clean
+
+    // const colors = [
+    //   "#FFDFD6",
+    //   "#FFFFFF",
+    //   "#FFFABA",
+    //   "#D6FFBA",
+    //   "#FFFFFF",
+    //   "#FFFFFF",
+    //   "#FFFFFF",
+    // ];
+    // circle.setAttribute(
+    //   "stroke",
+    //   colors[Math.floor(Math.random() * colors.length)]
+    // );
+
     // delete after animation finished
     circle.addEventListener("animationend", () => {
       if (!circle.classList.contains("paused")) {
